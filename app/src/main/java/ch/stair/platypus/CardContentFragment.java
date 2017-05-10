@@ -26,6 +26,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import ch.stair.platypus.models.Comments;
+import io.objectbox.Box;
+
 /**
  * Provides UI for the view with Cards.
  */
@@ -36,7 +40,11 @@ public class CardContentFragment extends Fragment {
                              Bundle savedInstanceState) {
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(
                 R.layout.recycler_view, container, false);
-        ContentAdapter adapter = new ContentAdapter(recyclerView.getContext());
+
+        Box<Comments> commentsBox  = ((App) getActivity().getApplication()).getBoxStore().boxFor(Comments.class);
+
+
+        ContentAdapter adapter = new ContentAdapter(recyclerView.getContext(),commentsBox);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -114,13 +122,13 @@ public class CardContentFragment extends Fragment {
         // Set numbers of Card in RecyclerView.
         private static final int LENGTH = 18;
 
-        private final String[] mPlaces;
-        private final String[] mPlaceDesc;
+        private Box<Comments> mCommentsBox;
 
-        public ContentAdapter(Context context) {
-            Resources resources = context.getResources();
-            mPlaces = resources.getStringArray(R.array.places);
-            mPlaceDesc = resources.getStringArray(R.array.place_desc);
+
+        public ContentAdapter(Context context, Box<Comments> commentsBox) {
+
+            this.mCommentsBox = commentsBox;
+
         }
 
         @Override
@@ -130,8 +138,16 @@ public class CardContentFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.name.setText(mPlaces[position % mPlaces.length]);
-            holder.description.setText(mPlaceDesc[position % mPlaceDesc.length]);
+            try
+            {
+                holder.name.setText(mCommentsBox.get(position).getId() + "");
+                holder.description.setText(mCommentsBox.get(position).getComment_text());
+            }
+            catch(Exception ex)
+            {
+                String a = ex.getMessage();
+            }
+
         }
 
         @Override

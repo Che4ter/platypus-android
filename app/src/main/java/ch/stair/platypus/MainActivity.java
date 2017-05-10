@@ -23,14 +23,29 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.stair.platypus.models.Comments;
+import io.objectbox.Box;
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
-
+    private Box<Comments> commentsBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        try
+        {
+            commentsBox = ((ch.stair.platypus.App)getApplication()).getBoxStore().boxFor(Comments.class);
+            seedDatabase();
+        }
+        catch(Exception ex)
+        {
+            String a = ex.getMessage();
+        }
+
+
         // Adding Toolbar to Main screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -39,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         setupViewPager(viewPager);
         // Set Tabs inside Toolbar
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
+
+
 
         tabs.setupWithViewPager(viewPager);
 
@@ -82,6 +99,15 @@ public class MainActivity extends AppCompatActivity {
                         Snackbar.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void seedDatabase()
+    {
+        if(commentsBox.count() <= 0)
+        {
+            InsertDummyData tmp = new InsertDummyData(commentsBox);
+            tmp.InsertComments(14);
+        }
     }
 
     // Add Fragments to Tabs
