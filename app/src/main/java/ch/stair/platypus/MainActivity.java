@@ -24,6 +24,7 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.stair.platypus.card.CardContentFragment;
 import ch.stair.platypus.models.Comments;
 import io.objectbox.Box;
 
