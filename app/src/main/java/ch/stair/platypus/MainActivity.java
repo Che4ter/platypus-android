@@ -34,14 +34,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        createDataBaseAndAddDummyData();
-        changeTopLeftIconInToolbarToFunctionAsNavigationBarOpener();
-
-        ViewPager viewPager = setupViewPagerWith3Fragments();
-        setTabIcons(viewPager);
-
-        setupNavigationBarNavigation();
-        createActionButton();
+        this.createDataBaseAndAddDummyData();
+        this.changeTopLeftIconInToolbarToFunctionAsNavigationBarOpener();
+        this.setupViewPagerWith3Fragments();
+        this.setupNavigationBarNavigation();
+        this.createActionButton();
     }
 
     private void createDataBaseAndAddDummyData() {
@@ -75,18 +72,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @NonNull
-    private ViewPager setupViewPagerWith3Fragments() {
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new CardContentFragment(),"");
-        adapter.addFragment(new ListContentFragment(), "");
-        adapter.addFragment(new ListContentFragment(), "");
+    private void setupViewPagerWith3Fragments() {
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        final Adapter adapter = new Adapter(getSupportFragmentManager());
+        adapter.addFragment(new CardContentFragment());
+        adapter.addFragment(new ListContentFragment());
+        adapter.addFragment(new ListContentFragment());
         viewPager.setAdapter(adapter);
-        return viewPager;
-    }
 
-    private void setTabIcons(ViewPager viewPager) {
-        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
+        final TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
         tabs.getTabAt(0).setIcon(R.drawable.ic_tab_home);
@@ -115,35 +109,6 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(v, "Hello Snackbar!", Snackbar.LENGTH_LONG).show());
     }
 
-    static class Adapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public Adapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -161,5 +126,32 @@ public class MainActivity extends AppCompatActivity {
             mDrawerLayout.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private static class Adapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+
+        public Adapter(final FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(final int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(final Fragment fragment) {
+            mFragmentList.add(fragment);
+        }
+
+        @Override
+        public CharSequence getPageTitle(final int position) {
+            return "";
+        }
     }
 }

@@ -7,9 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-/**
- * Provides UI for the Detail page with Collapsing Toolbar.
- */
 public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "position";
