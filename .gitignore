@@ -23,6 +23,7 @@ local.properties
 .signing/
 
 # User-specific configurations
+.idea/qaplug_profiles.xml
 .idea/libraries/
 .idea/workspace.xml
 .idea/tasks.xml
