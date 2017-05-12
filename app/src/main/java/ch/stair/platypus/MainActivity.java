@@ -1,6 +1,7 @@
 package ch.stair.platypus;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -28,44 +29,48 @@ import io.objectbox.Box;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DrawerLayout mDrawerLayout;
-    private Box<Comments> commentsBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        createDataBaseAndAddDummyData();
+        changeTopLeftIconInToolbarToFunctionAsNavigationBarOpener();
+
+        ViewPager viewPager = setupViewPagerWith3Fragments();
+        setTabIcons(viewPager);
+
+        setupNavigationBarNavigation();
+        createActionButton();
+    }
+
+    private void createDataBaseAndAddDummyData() {
         try
         {
-            commentsBox = ((ch.stair.platypus.App)getApplication()).getBoxStore().boxFor(Comments.class);
-            seedDatabase();
+            final Box<Comments> commentsBox = ((App)getApplication())
+                    .getBoxStore()
+                    .boxFor(Comments.class);
+
+            addDummyDataToDataBase(commentsBox);
         }
         catch(Exception ex)
         {
             String a = ex.getMessage();
         }
+    }
 
+    private void addDummyDataToDataBase(final Box<Comments> commentsBox) {
+        if(commentsBox.count() <= 0)
+        {
+            InsertDummyData tmp = new InsertDummyData(commentsBox);
+            tmp.InsertComments(14);
+        }
+    }
 
-        // Adding Toolbar to Main screen
+    private void changeTopLeftIconInToolbarToFunctionAsNavigationBarOpener() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Setting ViewPager for each Tabs
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-        // Set Tabs inside Toolbar
-        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
 
-
-
-        tabs.setupWithViewPager(viewPager);
-
-        tabs.getTabAt(0).setIcon(R.drawable.ic_tab_home);
-        tabs.getTabAt(1).setIcon(R.drawable.ic_tab_search);
-        tabs.getTabAt(2).setIcon(R.drawable.ic_tab_notifications);
-        // Create Navigation drawer and inlfate layout
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-        // Adding menu icon to Toolbar
         ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {
             VectorDrawableCompat indicator
@@ -74,22 +79,47 @@ public class MainActivity extends AppCompatActivity {
             supportActionBar.setHomeAsUpIndicator(indicator);
             supportActionBar.setDisplayHomeAsUpEnabled(true);
         }
-        // Set behavior of Navigation drawer
+    }
+
+    @NonNull
+    private ViewPager setupViewPagerWith3Fragments() {
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        Adapter adapter = new Adapter(getSupportFragmentManager());
+        adapter.addFragment(new CardContentFragment(),"");
+        adapter.addFragment(new ListContentFragment(), "");
+        adapter.addFragment(new ListContentFragment(), "");
+        viewPager.setAdapter(adapter);
+        return viewPager;
+    }
+
+    private void setTabIcons(ViewPager viewPager) {
+        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
+
+        tabs.getTabAt(0).setIcon(R.drawable.ic_tab_home);
+        tabs.getTabAt(1).setIcon(R.drawable.ic_tab_search);
+        tabs.getTabAt(2).setIcon(R.drawable.ic_tab_notifications);
+    }
+
+    private void setupNavigationBarNavigation() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
-                    // This method will trigger on item Click of navigation menu
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // Set item in checked state
                         menuItem.setChecked(true);
 
                         // TODO: handle navigation
 
-                        // Closing drawer on item click
                         mDrawerLayout.closeDrawers();
                         return true;
                     }
                 });
+    }
+
+    private void createActionButton() {
         // Adding Floating Action Button to bottom right of main view
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -99,25 +129,6 @@ public class MainActivity extends AppCompatActivity {
                         Snackbar.LENGTH_LONG).show();
             }
         });
-    }
-
-    private void seedDatabase()
-    {
-        if(commentsBox.count() <= 0)
-        {
-            InsertDummyData tmp = new InsertDummyData(commentsBox);
-            tmp.InsertComments(14);
-        }
-    }
-
-    // Add Fragments to Tabs
-    private void setupViewPager(ViewPager viewPager) {
-        Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new CardContentFragment(),"");
-        adapter.addFragment(new ListContentFragment(), "");
-        adapter.addFragment(new ListContentFragment(), "");
-
-        viewPager.setAdapter(adapter);
     }
 
     static class Adapter extends FragmentPagerAdapter {
@@ -151,21 +162,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
+
         if (id == R.id.action_settings) {
             return true;
         } else if (id == android.R.id.home) {
+            final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
             mDrawerLayout.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
