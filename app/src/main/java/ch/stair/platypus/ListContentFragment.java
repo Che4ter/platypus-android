@@ -3,8 +3,6 @@ package ch.stair.platypus;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -33,21 +30,17 @@ public class ListContentFragment extends Fragment {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView avator;
-        public TextView name;
-        public TextView description;
+        final public TextView name;
+        final public TextView description;
         public ViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.item_list, parent, false));
             name = (TextView) itemView.findViewById(R.id.list_title);
             description = (TextView) itemView.findViewById(R.id.list_desc);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, DetailActivity.class);
-                    intent.putExtra(DetailActivity.EXTRA_POSITION, getAdapterPosition());
-                    context.startActivity(intent);
-                }
+            itemView.setOnClickListener(v -> {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra(DetailActivity.EXTRA_POSITION, getAdapterPosition());
+                context.startActivity(intent);
             });
         }
     }

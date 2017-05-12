@@ -19,7 +19,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,18 +45,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createDataBaseAndAddDummyData() {
-        try
-        {
-            final Box<Comments> commentsBox = ((App)getApplication())
-                    .getBoxStore()
-                    .boxFor(Comments.class);
+        final Box<Comments> commentsBox = ((App)getApplication())
+                .getBoxStore()
+                .boxFor(Comments.class);
 
-            addDummyDataToDataBase(commentsBox);
-        }
-        catch(Exception ex)
-        {
-            String a = ex.getMessage();
-        }
+        addDummyDataToDataBase(commentsBox);
     }
 
     private void addDummyDataToDataBase(final Box<Comments> commentsBox) {
@@ -107,29 +99,20 @@ public class MainActivity extends AppCompatActivity {
         final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
         navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        menuItem.setChecked(true);
+                menuItem -> {
+                    menuItem.setChecked(true);
 
-                        // TODO: handle navigation
+                    // TODO: handle navigation
 
-                        mDrawerLayout.closeDrawers();
-                        return true;
-                    }
+                    mDrawerLayout.closeDrawers();
+                    return true;
                 });
     }
 
     private void createActionButton() {
-        // Adding Floating Action Button to bottom right of main view
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v, "Hello Snackbar!",
-                        Snackbar.LENGTH_LONG).show();
-            }
-        });
+        fab.setOnClickListener(v ->
+                Snackbar.make(v, "Hello Snackbar!", Snackbar.LENGTH_LONG).show());
     }
 
     static class Adapter extends FragmentPagerAdapter {

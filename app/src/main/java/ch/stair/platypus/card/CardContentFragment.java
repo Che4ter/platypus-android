@@ -30,7 +30,7 @@ public class CardContentFragment extends Fragment {
         final List<CardViewModel> cardViewModels = comments
                 .stream()
                 .map(x ->
-                    new CardViewModel(String.valueOf(x.getId()), x.getComment_text()))
+                    new CardViewModel(String.valueOf(x.getId()), x.getComment()))
                 .collect(Collectors.toList());
         final CardAdapter adapter = new CardAdapter(cardViewModels);
 
