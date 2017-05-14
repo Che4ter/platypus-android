@@ -39,7 +39,7 @@ public class ListContentFragment extends Fragment {
             itemView.setOnClickListener(v -> {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra(DetailActivity.EXTRA_POSITION, getAdapterPosition());
+                intent.putExtra(DetailActivity.EXTRA_ID, getAdapterPosition());
                 context.startActivity(intent);
             });
         }

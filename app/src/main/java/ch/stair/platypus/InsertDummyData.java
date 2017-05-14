@@ -36,6 +36,5 @@ class InsertDummyData {
             commentsBox.put(newComment);
             length = rand.nextInt(dummyText.length()) + 15;
         }
-
     }
 }

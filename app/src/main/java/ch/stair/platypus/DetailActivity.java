@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class DetailActivity extends AppCompatActivity {
 
-    public static final String EXTRA_POSITION = "position";
+    public static final String EXTRA_ID = "position";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class DetailActivity extends AppCompatActivity {
         // Set title of Detail page
         // collapsingToolbar.setTitle(getString(R.string.item_title));
 
-        int position = getIntent().getIntExtra(EXTRA_POSITION, 0);
+        int position = getIntent().getIntExtra(EXTRA_ID, 0);
         Resources resources = getResources();
         String[] places = resources.getStringArray(R.array.places);
         collapsingToolbar.setTitle(places[position % places.length]);

@@ -1,7 +1,6 @@
 package ch.stair.platypus;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -71,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @NonNull
     private void setupViewPagerWith3Fragments() {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         final Adapter adapter = new Adapter(getSupportFragmentManager());

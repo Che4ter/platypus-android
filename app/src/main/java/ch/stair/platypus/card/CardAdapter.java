@@ -20,10 +20,11 @@ class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {
 
     @Override
     public CardViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+        final CardViewHolderClickListener cardViewHolderClickListener = new CardViewHolderClickListenerImpl();
         final View view = LayoutInflater
                 .from(parent.getContext())
                 .inflate(viewType, parent, false);
-        return new CardViewHolder(view);
+        return new CardViewHolder(view, cardViewHolderClickListener);
     }
 
     @Override
