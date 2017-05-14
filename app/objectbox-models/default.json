@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "2:8179364230381232720",
-      "lastPropertyId": "7:1112453952561259686",
+      "lastPropertyId": "8:3951535604956038262",
       "name": "Comments",
       "properties": [
         {
@@ -19,6 +19,10 @@
         {
           "id": "7:1112453952561259686",
           "name": "comment"
+        },
+        {
+          "id": "8:3951535604956038262",
+          "name": "voteCount"
         }
       ]
     }

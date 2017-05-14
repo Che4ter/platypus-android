@@ -1,25 +1,33 @@
 package ch.stair.platypus.card;
 
+import java.util.Date;
+
 class CardViewModel {
     private final long id;
-    private final String name;
-    private final String description;
+    private final Date createdOn;
+    private final String text;
+    private final int voteCount;
 
-    CardViewModel(final long id, final String name, final String description) {
-        this.name = name;
-        this.description = description;
+    CardViewModel(final long id, final String text, final Date createdOn, final int voteCount) {
         this.id = id;
+        this.text = text;
+        this.createdOn = createdOn;
+        this.voteCount = voteCount;
     }
 
-    public long getId() {
+    long getId() {
         return id;
     }
 
-    String getName() {
-        return name;
+    String getText() {
+        return text;
     }
 
-    String getDescription() {
-        return description;
+    Date getCreatedOn() {
+        return createdOn;
+    }
+
+    int getVoteCount() {
+        return voteCount;
     }
 }

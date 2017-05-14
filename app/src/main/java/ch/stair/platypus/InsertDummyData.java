@@ -34,7 +34,8 @@ class InsertDummyData {
             final int substringEnd = rand.nextInt(dummyText.length());
             final String text = dummyText.substring(0, substringEnd);
             final Date now = new Date();
-            final Comments newComment = new Comments(idSoDbWillAssignANewId, text, now);
+            final int voteCount = rand.nextInt(1000);
+            final Comments newComment = new Comments(idSoDbWillAssignANewId, text, now, voteCount);
             commentsBox.put(newComment);
         }
     }

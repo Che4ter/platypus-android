@@ -20,14 +20,4 @@ class CardViewHolderClickListenerImpl implements CardViewHolderClickListener {
     public void actionButtonClicked(final View cardView) {
         Snackbar.make(cardView, "Action is pressed", Snackbar.LENGTH_LONG).show();
     }
-
-    @Override
-    public void favoriteButtonClicked(final View cardView) {
-        Snackbar.make(cardView, "Added to Favorite", Snackbar.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void shareButtonClicked(final View cardView) {
-        Snackbar.make(cardView, "Share article", Snackbar.LENGTH_LONG).show();
-    }
 }
