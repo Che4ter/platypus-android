@@ -19,6 +19,9 @@ public class FeedbackPOJO {
     @SerializedName("last_modified")
     private Date lastModified;
 
+    @SerializedName("creation_date")
+    private Date creationDate;
+
     @SerializedName("votes_count")
     private Integer votesCount;
 
@@ -58,6 +61,14 @@ public class FeedbackPOJO {
 
     public void setLastModified(Date lastModified) {
         this.lastModified = lastModified;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     public Integer getVotesCount() {

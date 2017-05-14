@@ -95,6 +95,7 @@ public class SyncFeedbacks {
                 feedbackToModify.setFeedbackText(updatedFeedback.getFeedbackText());
                 feedbackToModify.setLastModified(updatedFeedback.getLastModified());
                 feedbackToModify.setVotesCount(updatedFeedback.getVotesCount());
+                feedbackToModify.setCreationDate(updatedFeedback.getCreationDate());
                 if(updatedFeedback.getParentId() != null)
                 {
                     feedbackToModify.setParentId(updatedFeedback.getParentId());
