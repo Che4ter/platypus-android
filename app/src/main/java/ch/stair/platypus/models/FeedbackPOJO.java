@@ -6,10 +6,10 @@ import java.util.List;
 public class FeedbackPOJO {
     private Integer id;
     private String feedbackText;
+    private Integer parentId;
     private Date lastModified;
-    private Integer votes;
+    private Integer votesCount;
     private List<HashtagPOJO> hashtags;
-    private String userName;
 
     public FeedbackPOJO()
     {}
@@ -30,6 +30,14 @@ public class FeedbackPOJO {
         this.feedbackText = feedbackText;
     }
 
+    public Integer parentId() {
+        return id;
+    }
+
+    public void parentId(Integer id) {
+        this.id = id;
+    }
+
     public Date getLastModified() {
         return lastModified;
     }
@@ -38,12 +46,12 @@ public class FeedbackPOJO {
         this.lastModified = lastModified;
     }
 
-    public Integer getVotes() {
-        return votes;
+    public Integer getVotesCount() {
+        return votesCount;
     }
 
-    public void setVotes(Integer votes) {
-        this.votes = votes;
+    public void setVotesCount(Integer votesCount) {
+        this.votesCount = votesCount;
     }
 
     public List<HashtagPOJO> getHashtags() {
@@ -52,13 +60,5 @@ public class FeedbackPOJO {
 
     public void setHashtags(List<HashtagPOJO> hashtags) {
         this.hashtags = hashtags;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 }
