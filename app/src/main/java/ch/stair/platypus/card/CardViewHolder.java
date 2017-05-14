@@ -4,6 +4,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -28,7 +29,14 @@ class CardViewHolder extends RecyclerView.ViewHolder {
         this.voteCount = (TextView) cardView.findViewById(R.id.card_voteCount);
         this.cardViewHolderClickListener = cardViewHolderClickListener;
 
-        setupOnClickForExampleButtons(cardView);
+        cardView.setOnClickListener(v -> this.cardViewHolderClickListener.itemClicked(v, this.id));
+        Button actionButton = (Button) cardView.findViewById(R.id.action_button);
+        actionButton.setOnClickListener(this.cardViewHolderClickListener::actionButtonClicked);
+        ImageButton upVoteButton = (ImageButton) cardView.findViewById(R.id.upvote_button);
+        upVoteButton.setOnClickListener(v -> this.cardViewHolderClickListener.upVoteClicked(v, this.id));
+        ImageButton downVoteButton = (ImageButton) cardView.findViewById(R.id.downvote_button);
+        downVoteButton.setOnClickListener(v -> this.cardViewHolderClickListener.downVoteClicked(v, this.id));
+
         setCardBackgroundToRandomColor(cardView);
     }
 
@@ -37,13 +45,6 @@ class CardViewHolder extends RecyclerView.ViewHolder {
         this.text.setText(viewModel.getText());
         this.creationDate.setText(viewModel.getCreatedOn().toString());
         this.voteCount.setText(String.valueOf(viewModel.getVoteCount()));
-    }
-
-    private void setupOnClickForExampleButtons(final View cardView) {
-        cardView.setOnClickListener(v -> this.cardViewHolderClickListener.itemClicked(v, this.id));
-
-        Button button = (Button)cardView.findViewById(R.id.action_button);
-        button.setOnClickListener(this.cardViewHolderClickListener::actionButtonClicked);
     }
 
     private void setCardBackgroundToRandomColor(final View itemView) {
