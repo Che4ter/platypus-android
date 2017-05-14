@@ -4,11 +4,11 @@ import java.util.Date;
 
 class CardViewModel {
     private final long id;
-    private final Date createdOn;
+    private final String createdOn;
     private final String text;
     private final int voteCount;
 
-    CardViewModel(final long id, final String text, final Date createdOn, final int voteCount) {
+    CardViewModel(final long id, final String text, final String createdOn, final int voteCount) {
         this.id = id;
         this.text = text;
         this.createdOn = createdOn;
@@ -23,7 +23,7 @@ class CardViewModel {
         return text;
     }
 
-    Date getCreatedOn() {
+    String getCreatedOn() {
         return createdOn;
     }
 

@@ -13,8 +13,9 @@ import java.util.stream.Collectors;
 
 import ch.stair.platypus.App;
 import ch.stair.platypus.R;
-import ch.stair.platypus.models.Comments;
 import ch.stair.platypus.models.Feedback;
+
+import static ch.stair.platypus.Helpers.getReadableDate;
 
 public class CardContentFragment extends Fragment {
 
@@ -31,7 +32,7 @@ public class CardContentFragment extends Fragment {
         final List<CardViewModel> cardViewModels = comments
                 .stream()
                 .map(x ->
-                    new CardViewModel(x.getId(), x.getFeedbackText(), x.getCreationDate(), x.getVotesCount()))
+                    new CardViewModel(x.getId(), x.getFeedbackText(),getReadableDate(x.getCreationDate()), x.getVotesCount()))
                 .collect(Collectors.toList());
         final CardAdapter adapter = new CardAdapter(cardViewModels);
 
