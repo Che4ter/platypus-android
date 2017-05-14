@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.stair.platypus.card.CardContentFragment;
+import ch.stair.platypus.rest.SyncFeedbacks;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SyncFeedbacks s = new SyncFeedbacks(((App)getApplication()));
+        s.fetchLatestFeedbacksToDB();
 
         this.changeTopLeftIconInToolbarToFunctionAsNavigationBarOpener();
         this.setupViewPagerWith3Fragments();

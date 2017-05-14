@@ -44,11 +44,11 @@ public class FeedbackPOJO {
         this.feedbackText = feedbackText;
     }
 
-    public Integer getParentIdparentId() {
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentIdparentId(Integer parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 
