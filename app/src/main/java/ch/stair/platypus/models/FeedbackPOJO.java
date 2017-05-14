@@ -1,14 +1,28 @@
 package ch.stair.platypus.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 import java.util.List;
 
 public class FeedbackPOJO {
+
+    @SerializedName("id")
     private Integer id;
+
+    @SerializedName("feedback_text")
     private String feedbackText;
+
+    @SerializedName("parent_id")
     private Integer parentId;
+
+    @SerializedName("last_modified")
     private Date lastModified;
+
+    @SerializedName("votes_count")
     private Integer votesCount;
+
+    @SerializedName("hashtags")
     private List<HashtagPOJO> hashtags;
 
     public FeedbackPOJO()
@@ -30,12 +44,12 @@ public class FeedbackPOJO {
         this.feedbackText = feedbackText;
     }
 
-    public Integer parentId() {
-        return id;
+    public Integer getParentIdparentId() {
+        return parentId;
     }
 
-    public void parentId(Integer id) {
-        this.id = id;
+    public void setParentIdparentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     public Date getLastModified() {

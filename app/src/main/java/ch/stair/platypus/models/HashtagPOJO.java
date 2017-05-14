@@ -1,11 +1,17 @@
 package ch.stair.platypus.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class HashtagPOJO {
+    @SerializedName("id")
     private Integer id;
+    @SerializedName("hashtext")
     private String hashText;
+    @SerializedName("hash_types_id")
     private Integer hashTypesId;
+    @SerializedName("last_modified")
     private Date lastModified;
 
     public HashtagPOJO() {
