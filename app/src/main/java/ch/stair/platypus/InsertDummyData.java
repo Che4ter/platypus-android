@@ -14,7 +14,7 @@ class InsertDummyData {
         this.commentsBox = commentsBox;
     }
 
-    void InsertComments(final Integer count) {
+    void insertComments(final Integer count) {
         final String dummyText = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, " +
                 "sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, " +
                 "sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. " +

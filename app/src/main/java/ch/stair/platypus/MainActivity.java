@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         if(commentsBox.count() <= 0)
         {
             InsertDummyData tmp = new InsertDummyData(commentsBox);
-            tmp.InsertComments(14);
+            tmp.insertComments(14);
         }
     }
 

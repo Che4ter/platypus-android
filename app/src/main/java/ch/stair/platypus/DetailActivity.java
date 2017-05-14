@@ -12,28 +12,28 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_ID = "position";
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Set Collapsing Toolbar layout to the screen
-        CollapsingToolbarLayout collapsingToolbar =
+        final CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         // Set title of Detail page
         // collapsingToolbar.setTitle(getString(R.string.item_title));
 
-        int position = getIntent().getIntExtra(EXTRA_ID, 0);
-        Resources resources = getResources();
-        String[] places = resources.getStringArray(R.array.places);
+        final int position = getIntent().getIntExtra(EXTRA_ID, 0);
+        final Resources resources = getResources();
+        final String[] places = resources.getStringArray(R.array.places);
         collapsingToolbar.setTitle(places[position % places.length]);
 
-        String[] placeDetails = resources.getStringArray(R.array.place_details);
-        TextView placeDetail = (TextView) findViewById(R.id.place_detail);
+        final String[] placeDetails = resources.getStringArray(R.array.place_details);
+        final TextView placeDetail = (TextView) findViewById(R.id.place_detail);
         placeDetail.setText(placeDetails[position % placeDetails.length]);
 
-        String[] placeLocations = resources.getStringArray(R.array.place_locations);
-        TextView placeLocation =  (TextView) findViewById(R.id.place_location);
+        final String[] placeLocations = resources.getStringArray(R.array.place_locations);
+        final TextView placeLocation =  (TextView) findViewById(R.id.place_location);
         placeLocation.setText(placeLocations[position % placeLocations.length]);
     }
 }
