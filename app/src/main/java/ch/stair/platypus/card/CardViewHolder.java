@@ -43,7 +43,7 @@ class CardViewHolder extends RecyclerView.ViewHolder {
     public void bindData(final CardViewModel viewModel) {
         this.id = viewModel.getId();
         this.text.setText(viewModel.getText());
-        this.creationDate.setText(viewModel.getCreatedOn().toString());
+        this.creationDate.setText(viewModel.getCreatedOn());
         this.voteCount.setText(String.valueOf(viewModel.getVoteCount()));
     }
 

@@ -1,7 +1,5 @@
 package ch.stair.platypus.card;
 
-import java.util.Date;
-
 class CardViewModel {
     private final long id;
     private final String createdOn;

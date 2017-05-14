@@ -1,21 +1,17 @@
 package ch.stair.platypus;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 
 public final class Helpers {
     public static String getReadableDate(Date uglyDate) {
         int diffInDays = 0;
 
         //todo: use utc time
-        Date d1 = new Date();
-
-        Date d2 = uglyDate;
+        Date currentDate = new Date();
 
         String readableDate = "";
 
-        long diff = d1.getTime() - d2.getTime();
+        long diff = currentDate.getTime() - uglyDate.getTime();
 
         diffInDays = (int) (diff / (1000 * 60 * 60 * 24));
         if (diffInDays > 0) {
