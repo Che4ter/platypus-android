@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import ch.stair.platypus.App;
 import ch.stair.platypus.R;
 import ch.stair.platypus.models.Comments;
+import ch.stair.platypus.models.Feedback;
 
 public class CardContentFragment extends Fragment {
 
@@ -23,14 +24,14 @@ public class CardContentFragment extends Fragment {
             final ViewGroup container,
             final Bundle savedInstanceState) {
 
-        final List<Comments> comments = ((App) getActivity().getApplication())
+        final List<Feedback> comments = ((App) getActivity().getApplication())
                 .getBoxStore()
-                .boxFor(Comments.class)
+                .boxFor(Feedback.class)
                 .getAll();
         final List<CardViewModel> cardViewModels = comments
                 .stream()
                 .map(x ->
-                    new CardViewModel(x.getId(), x.getComment(), x.getCreated(), x.getVoteCount()))
+                    new CardViewModel(x.getId(), x.getFeedbackText(), x.getCreationDate(), x.getVotesCount()))
                 .collect(Collectors.toList());
         final CardAdapter adapter = new CardAdapter(cardViewModels);
 
