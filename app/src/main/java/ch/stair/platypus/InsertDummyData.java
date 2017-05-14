@@ -14,7 +14,9 @@ class InsertDummyData {
         this.commentsBox = commentsBox;
     }
 
-    void insertComments(final Integer count) {
+    void insertComments() {
+        final Integer count = 14;
+
         final String dummyText = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, " +
                 "sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, " +
                 "sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. " +
@@ -26,15 +28,14 @@ class InsertDummyData {
 
         final Random rand = new Random();
 
-        int length = rand.nextInt(dummyText.length()) + 15;
         for(int i=0; i<count;i++)
         {
-            final Comments newComment = new Comments();
-            newComment.setComment(dummyText.substring(0,length));
-            newComment.setCreated(new Date());
-            newComment.setDeleted(false);
+            final int idSoDbWillAssignANewId = 0;
+            final int substringEnd = rand.nextInt(dummyText.length());
+            final String text = dummyText.substring(0, substringEnd);
+            final Date now = new Date();
+            final Comments newComment = new Comments(idSoDbWillAssignANewId, text, now);
             commentsBox.put(newComment);
-            length = rand.nextInt(dummyText.length()) + 15;
         }
     }
 }

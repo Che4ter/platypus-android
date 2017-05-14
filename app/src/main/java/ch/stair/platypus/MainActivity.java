@@ -23,8 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.stair.platypus.card.CardContentFragment;
-import ch.stair.platypus.models.Comments;
-import io.objectbox.Box;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,27 +31,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.createDataBaseAndAddDummyData();
         this.changeTopLeftIconInToolbarToFunctionAsNavigationBarOpener();
         this.setupViewPagerWith3Fragments();
         this.setupNavigationBarNavigation();
         this.createActionButton();
-    }
-
-    private void createDataBaseAndAddDummyData() {
-        final Box<Comments> commentsBox = ((App)getApplication())
-                .getBoxStore()
-                .boxFor(Comments.class);
-
-        addDummyDataToDataBase(commentsBox);
-    }
-
-    private void addDummyDataToDataBase(final Box<Comments> commentsBox) {
-        if(commentsBox.count() <= 0)
-        {
-            InsertDummyData tmp = new InsertDummyData(commentsBox);
-            tmp.insertComments(14);
-        }
     }
 
     private void changeTopLeftIconInToolbarToFunctionAsNavigationBarOpener() {
