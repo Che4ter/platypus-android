@@ -21,9 +21,9 @@ public class FeedbackHashtag {
     long feedbackId;
 
     @Relation
-    private Hashtag hashtag;
+    public Hashtag hashtag;
     @Relation
-    private Feedback feedback;
+    public Feedback feedback;
     /** Used to resolve relations */
     @Internal
     @Generated(1307364262)

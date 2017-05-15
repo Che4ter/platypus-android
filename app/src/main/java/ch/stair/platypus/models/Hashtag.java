@@ -21,7 +21,7 @@ public class Hashtag {
     private Date lastModified;
 
     @Backlink
-    List<FeedbackHashtag> hashtagInFeedback = new ToMany<>(this, Hashtag_.hashtagInFeedback);
+    public List<FeedbackHashtag> hashtagInFeedback = new ToMany<>(this, Hashtag_.hashtagInFeedback);
     /** Used to resolve relations */
     @Internal
     @Generated(1307364262)

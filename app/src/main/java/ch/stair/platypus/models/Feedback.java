@@ -26,7 +26,7 @@ public class Feedback {
     private Integer votesCount;
 
     @Backlink
-    List<FeedbackHashtag> feedbackHashtagses = new ToMany<>(this, Feedback_.feedbackHashtagses);
+    public List<FeedbackHashtag> feedbackHashtagses = new ToMany<>(this, Feedback_.feedbackHashtagses);
 
     //Reference to self
     long feedbackId;
