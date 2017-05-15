@@ -2,22 +2,17 @@ package ch.stair.platypus.rest;
 
 import android.util.Log;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
 import ch.stair.platypus.App;
 import ch.stair.platypus.models.Feedback;
 import ch.stair.platypus.models.FeedbackHashtag;
-import ch.stair.platypus.models.FeedbackHashtag_;
 import ch.stair.platypus.models.FeedbackPOJO;
-import ch.stair.platypus.models.Feedback_;
 import ch.stair.platypus.models.Hashtag;
 import ch.stair.platypus.models.HashtagPOJO;
-import ch.stair.platypus.models.Hashtag_;
 import io.objectbox.Box;
 import io.objectbox.exception.DbException;
-import io.objectbox.query.Query;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,7 +25,6 @@ public class SyncFeedbacks {
     final private PlatypusClient client;
     final private Box<Feedback> feedbackBox;
     final private Box<Hashtag> hashtagBox;
-    final private Box<FeedbackHashtag> feedbackHashtagBox;
 
     public SyncFeedbacks(App applicationContext) {
 
@@ -41,10 +35,6 @@ public class SyncFeedbacks {
         hashtagBox = applicationContext
                 .getBoxStore()
                 .boxFor(Hashtag.class);
-
-        feedbackHashtagBox = applicationContext
-                .getBoxStore()
-                .boxFor(FeedbackHashtag.class);
 
         client = ServiceGenerator.createService(PlatypusClient.class);
     }

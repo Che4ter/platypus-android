@@ -25,14 +25,14 @@ public class DetailActivity extends AppCompatActivity {
 
         final int position = getIntent().getIntExtra(EXTRA_ID, 0);
         final Resources resources = getResources();
-        final String[] places = resources.getStringArray(R.array.places);
+        final String[] places = new String[]{"hello world"};
         collapsingToolbar.setTitle(places[position % places.length]);
 
-        final String[] placeDetails = resources.getStringArray(R.array.place_details);
+        final String[] placeDetails = new String[]{"hello world"};
         final TextView placeDetail = (TextView) findViewById(R.id.place_detail);
         placeDetail.setText(placeDetails[position % placeDetails.length]);
 
-        final String[] placeLocations = resources.getStringArray(R.array.place_locations);
+        final String[] placeLocations = new String[]{"hello world"};
         final TextView placeLocation =  (TextView) findViewById(R.id.place_location);
         placeLocation.setText(placeLocations[position % placeLocations.length]);
     }

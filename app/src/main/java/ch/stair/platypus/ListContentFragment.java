@@ -57,8 +57,9 @@ public class ListContentFragment extends Fragment {
 
         public ContentAdapter(Context context) {
             Resources resources = context.getResources();
-            mPlaces = resources.getStringArray(R.array.places);
-            mPlaceDesc = resources.getStringArray(R.array.place_desc);
+            //mPlaces = resources.getStringArray(R.array.places);
+            mPlaces = new String[]{"hello world"};
+            mPlaceDesc = new String[]{"hello world"};
 
         }
         @Override

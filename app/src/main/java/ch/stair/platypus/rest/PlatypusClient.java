@@ -6,7 +6,7 @@ import ch.stair.platypus.models.FeedbackPOJO;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface PlatypusClient {
+interface PlatypusClient {
     @GET("feedback")
     Call<List<FeedbackPOJO>> getFeedback();
 }

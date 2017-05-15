@@ -4,12 +4,12 @@ import java.util.Date;
 
 public final class Helpers {
     public static String getReadableDate(Date uglyDate) {
-        int diffInDays = 0;
+        int diffInDays;
 
         //todo: use utc time
         Date currentDate = new Date();
 
-        String readableDate = "";
+        String readableDate;
 
         long diff = currentDate.getTime() - uglyDate.getTime();
 
