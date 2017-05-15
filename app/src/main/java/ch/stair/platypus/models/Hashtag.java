@@ -14,7 +14,7 @@ import io.objectbox.Box;
 
 @Entity
 public class Hashtag {
-    @Id
+    @Id(assignable = true)
     private long id;
     private String hashText;
     private Integer hashTypesId;
