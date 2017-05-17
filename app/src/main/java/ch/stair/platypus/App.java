@@ -16,14 +16,6 @@ public class App extends Application {
         super.onCreate();
 
         this.boxStore = MyObjectBox.builder().androidContext(App.this).build();
-        final Box<Comments> commentsBox = boxStore.boxFor(Comments.class);
-        addDummyDataToDataBase(commentsBox);
-    }
-
-    private void addDummyDataToDataBase(final Box<Comments> commentsBox) {
-        commentsBox.removeAll();
-        final InsertDummyData insertDummyData = new InsertDummyData(commentsBox);
-        insertDummyData.insertComments();
     }
 
     public BoxStore getBoxStore() {
