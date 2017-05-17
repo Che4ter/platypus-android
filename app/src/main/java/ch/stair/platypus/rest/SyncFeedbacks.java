@@ -40,7 +40,7 @@ public class SyncFeedbacks {
     }
 
     public void fetchLatestFeedbacksToDB() {
-        Call<List<FeedbackPOJO>> call = client.getFeedback();
+        Call<List<FeedbackPOJO>> call = client.getFeedback(1494051122L);
         call.enqueue(new Callback<List<FeedbackPOJO>>() {
 
             @Override
