@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import ch.stair.platypus.App;
+import ch.stair.platypus.PreferencesManager;
 import ch.stair.platypus.models.Feedback;
 import ch.stair.platypus.models.FeedbackHashtag;
 import ch.stair.platypus.models.FeedbackPOJO;
@@ -40,12 +41,13 @@ public class SyncFeedbacks {
     }
 
     public void fetchLatestFeedbacksToDB() {
-        Call<List<FeedbackPOJO>> call = client.getFeedback(1494051122L);
+        Call<List<FeedbackPOJO>> call = client.getFeedback(getLastSyncDate());
         call.enqueue(new Callback<List<FeedbackPOJO>>() {
 
             @Override
             public void onResponse(Call<List<FeedbackPOJO>> call, Response<List<FeedbackPOJO>> response) {
                 if (response.isSuccessful()) {
+                    setLastSyncDate();
                     // tasks available
                     Log.d("Debug", "Response is Successful");
                     if (!response.body().isEmpty()) {
@@ -55,7 +57,6 @@ public class SyncFeedbacks {
                 } else {
                     // error response, no access to resource?
                     Log.d("Error", "Error in Response");
-
                 }
             }
 
@@ -88,5 +89,18 @@ public class SyncFeedbacks {
         } catch (Exception ex) {
             Log.d("Error", ex.getMessage());
         }
+    }
+
+    private long getLastSyncDate()
+    {
+        PreferencesManager prefManager = PreferencesManager.getInstance();
+        return prefManager.getLongValue(PreferencesManager.KEYS.LAST_SYNC);
+    }
+
+    private void setLastSyncDate()
+    {
+        PreferencesManager prefManager = PreferencesManager.getInstance();
+        long newSyncDate = (System.currentTimeMillis() / 1000L) - (5L * 60L); //Substract 5min for time differences between server and client
+        prefManager.setValue(PreferencesManager.KEYS.LAST_SYNC,newSyncDate);
     }
 }

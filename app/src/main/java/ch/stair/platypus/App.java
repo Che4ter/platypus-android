@@ -3,9 +3,7 @@ package ch.stair.platypus;
 
 import android.app.Application;
 
-import ch.stair.platypus.models.Comments;
 import ch.stair.platypus.models.MyObjectBox;
-import io.objectbox.Box;
 import io.objectbox.BoxStore;
 
 public class App extends Application {
@@ -15,7 +13,11 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
+        //Initialize ObjectBox DB
         this.boxStore = MyObjectBox.builder().androidContext(App.this).build();
+
+        //Initialize Shared Preferences Manager
+        PreferencesManager.initializeInstance(this.getApplicationContext());
     }
 
     public BoxStore getBoxStore() {
