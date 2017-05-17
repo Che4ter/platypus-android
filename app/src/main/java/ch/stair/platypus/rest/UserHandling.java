@@ -41,4 +41,30 @@ public class UserHandling {
             }
         });
     }
+
+    public void loginUser(String emailAddress, String password) {
+        Call<JsonObject> call = client.loginUser(new RegistrationLoginPOJO(emailAddress,password));
+        call.enqueue(new Callback<JsonObject>() {
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful()) {
+                    Log.d("Debug", "Response is Successful");
+                    if(response.body().get("success").getAsInt() == 1){
+                        String token = response.body().get("token").getAsString();
+                        Log.d("Debug", "User logged in");
+
+                    }
+                } else {
+                    // error response, no access to resource?
+                    Log.d("Error", "Error in Response");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Log.d("Error", t.getMessage());
+            }
+        });
+    }
 }

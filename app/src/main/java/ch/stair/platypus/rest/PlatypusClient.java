@@ -20,4 +20,7 @@ interface PlatypusClient {
 
     @POST("user")
     Call<JsonObject> registerUser(@Body RegistrationLoginPOJO userCreationPOJO);
+
+    @POST("auth/token")
+    Call<JsonObject> loginUser(@Body RegistrationLoginPOJO userCreationPOJO);
 }
