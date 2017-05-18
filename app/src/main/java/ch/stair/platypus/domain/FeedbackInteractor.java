@@ -13,8 +13,8 @@ import static ch.stair.platypus.Helpers.getReadableDate;
 
 public class FeedbackInteractor {
 
-    private Repository repository;
-    private SyncFeedbacks syncFeedbacks;
+    private final Repository repository;
+    private final SyncFeedbacks syncFeedbacks;
 
     @Inject
     public FeedbackInteractor(

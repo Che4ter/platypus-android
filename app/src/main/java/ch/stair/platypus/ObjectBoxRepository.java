@@ -9,7 +9,7 @@ import ch.stair.platypus.models.Feedback;
 import io.objectbox.BoxStore;
 
 public class ObjectBoxRepository implements Repository {
-    private BoxStore boxStore;
+    private final BoxStore boxStore;
 
     @Inject
     public ObjectBoxRepository(final BoxStore boxStore) {

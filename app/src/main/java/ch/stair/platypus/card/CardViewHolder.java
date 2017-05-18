@@ -1,6 +1,5 @@
 package ch.stair.platypus.card;
 
-import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -18,7 +17,7 @@ class CardViewHolder extends RecyclerView.ViewHolder {
     public final TextView text;
     public final TextView creationDate;
     public final TextView voteCount;
-    public AppCompatImageButton voteUp;
+    public final ImageButton voteUp;
     public final ImageButton voteDown;
 
     public CardViewHolder(final View cardView) {
@@ -28,7 +27,7 @@ class CardViewHolder extends RecyclerView.ViewHolder {
         this.text = (TextView) cardView.findViewById(R.id.card_text);
         this.creationDate = (TextView) cardView.findViewById(R.id.card_creationDate);
         this.voteCount = (TextView) cardView.findViewById(R.id.card_voteCount);
-        this.voteUp = (AppCompatImageButton) cardView.findViewById(R.id.upvote_button);
+        this.voteUp = (ImageButton) cardView.findViewById(R.id.upvote_button);
         this.voteDown = (ImageButton) cardView.findViewById(R.id.downvote_button);
 
         setCardBackgroundToRandomColor(cardView);

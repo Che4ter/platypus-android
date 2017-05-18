@@ -45,12 +45,12 @@ class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {
         });
         holder.voteUp.setOnClickListener(v -> {
             if (this.listener != null) {
-                this.listener.voteUpClicked(v, viewModel);
+                this.listener.voteUpClicked(viewModel);
             }
         });
         holder.voteDown.setOnClickListener(v -> {
             if (this.listener != null) {
-                this.listener.voteDownClicked(v, viewModel);
+                this.listener.voteDownClicked(viewModel);
             }
         });
     }

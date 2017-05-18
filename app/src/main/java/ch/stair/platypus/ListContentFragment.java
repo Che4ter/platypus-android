@@ -2,7 +2,6 @@ package ch.stair.platypus;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -56,11 +55,8 @@ public class ListContentFragment extends Fragment {
         private final String[] mPlaceDesc;
 
         public ContentAdapter(Context context) {
-            Resources resources = context.getResources();
-            //mPlaces = resources.getStringArray(R.array.places);
             mPlaces = new String[]{"hello world"};
             mPlaceDesc = new String[]{"hello world"};
-
         }
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

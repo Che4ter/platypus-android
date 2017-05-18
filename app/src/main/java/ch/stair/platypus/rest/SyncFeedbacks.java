@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 
 import javax.inject.Inject;
 
-import ch.stair.platypus.App;
 import ch.stair.platypus.PreferencesManager;
 import ch.stair.platypus.models.Feedback;
 import ch.stair.platypus.models.FeedbackHashtag;
@@ -26,9 +25,9 @@ import static ch.stair.platypus.mapper.HashtagMapper.mapHashtagPOJOToHashtag;
 
 public class SyncFeedbacks {
 
-    private PlatypusClient client;
-    private Box<Feedback> feedbackBox;
-    private Box<Hashtag> hashtagBox;
+    private final PlatypusClient client;
+    private final  Box<Feedback> feedbackBox;
+    private final Box<Hashtag> hashtagBox;
 
     @Inject
     public SyncFeedbacks(final BoxStore boxStore) {

@@ -3,13 +3,13 @@ package ch.stair.platypus.models;
 import java.util.Date;
 import java.util.List;
 
+import io.objectbox.BoxStore;
 import io.objectbox.annotation.Backlink;
 import io.objectbox.annotation.Entity;
-import io.objectbox.annotation.Id;
-import io.objectbox.relation.ToMany;
 import io.objectbox.annotation.Generated;
+import io.objectbox.annotation.Id;
 import io.objectbox.annotation.apihint.Internal;
-import io.objectbox.BoxStore;
+import io.objectbox.relation.ToMany;
 import io.objectbox.Box;
 
 @Entity

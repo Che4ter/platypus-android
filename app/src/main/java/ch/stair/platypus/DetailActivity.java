@@ -1,6 +1,5 @@
 package ch.stair.platypus;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +23,6 @@ public class DetailActivity extends AppCompatActivity {
         // collapsingToolbar.setTitle(getString(R.string.item_title));
 
         final int position = getIntent().getIntExtra(EXTRA_ID, 0);
-        final Resources resources = getResources();
         final String[] places = new String[]{"hello world"};
         collapsingToolbar.setTitle(places[position % places.length]);
 

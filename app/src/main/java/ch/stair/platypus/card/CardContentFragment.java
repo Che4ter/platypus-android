@@ -96,24 +96,24 @@ public class CardContentFragment extends BaseFragment implements FeedbackCardVie
         this.cardAdapter.setViewModels(feedbackModelList);
     }
 
-    private CardViewListener cardViewListener =
+    private final CardViewListener cardViewListener =
             new CardViewListener() {
                 @Override
-                public void onCardClicked(FeedbackModel feedbackModel) {
+                public void onCardClicked(final FeedbackModel feedbackModel) {
                     if (CardContentFragment.this.presenter != null && feedbackModel != null) {
                         CardContentFragment.this.presenter.onCardViewClicked(feedbackModel);
                     }
                 }
 
                 @Override
-                public void voteUpClicked(View cardView, FeedbackModel feedbackModel) {
+                public void voteUpClicked(final FeedbackModel feedbackModel) {
                     if (CardContentFragment.this.presenter != null && feedbackModel != null) {
                         CardContentFragment.this.presenter.onVoteUpClicked(feedbackModel);
                     }
                 }
 
                 @Override
-                public void voteDownClicked(View cardView, FeedbackModel feedbackModel) {
+                public void voteDownClicked(final FeedbackModel feedbackModel) {
                     if (CardContentFragment.this.presenter != null && feedbackModel != null) {
                         CardContentFragment.this.presenter.onVoteDownClicked(feedbackModel);
                     }
