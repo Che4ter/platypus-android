@@ -7,18 +7,18 @@ import javax.inject.Inject;
 import ch.stair.platypus.di.PerActivity;
 import ch.stair.platypus.domain.FeedbackModel;
 import ch.stair.platypus.domain.FeedbackInteractor;
-import ch.stair.platypus.domain.ICardView;
+import ch.stair.platypus.domain.FeedbackCardView;
 
 @PerActivity
 public class Presenter {
     private final FeedbackInteractor feedbackInteractor;
-    private ICardView cardView;
+    private FeedbackCardView cardView;
 
     @Inject public Presenter(final FeedbackInteractor feedbackInteractor) {
         this.feedbackInteractor = feedbackInteractor;
     }
 
-    public void setView(ICardView cardView) {
+    public void setView(FeedbackCardView cardView) {
         this.cardView = cardView;
     }
 
