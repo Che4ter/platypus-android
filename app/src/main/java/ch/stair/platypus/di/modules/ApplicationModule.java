@@ -30,7 +30,9 @@ public class ApplicationModule {
     return objectBoxRepository;
   }
 
-  @Provides @Singleton BoxStore provideBoxStore() {
+  @Provides
+  @Singleton
+  BoxStore provideBoxStore() {
     return MyObjectBox.builder()
             .androidContext(this.application)
             .build();

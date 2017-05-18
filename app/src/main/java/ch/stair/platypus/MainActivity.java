@@ -34,11 +34,7 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         this.initializeInjector();
-
-//        SyncFeedbacks s = new SyncFeedbacks(((App)getApplication()));
-//        s.fetchLatestFeedbacksToDB();
 
         this.changeTopLeftIconInToolbarToFunctionAsNavigationBarOpener();
         this.setupViewPagerWith3Fragments();

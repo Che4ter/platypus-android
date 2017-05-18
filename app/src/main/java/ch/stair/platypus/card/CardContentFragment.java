@@ -55,13 +55,14 @@ public class CardContentFragment extends BaseFragment implements FeedbackCardVie
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.presenter.setView(this);
-        this.presenter.initialize();
+        this.presenter.showFeedbacks();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getComponent(FeedbackComponent.class).inject(this);
+        this.presenter.initialize();
     }
 
     @Override

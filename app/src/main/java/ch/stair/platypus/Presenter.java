@@ -27,6 +27,10 @@ public class Presenter {
     }
 
     public void initialize() {
+        this.feedbackInteractor.fetchOnlineFeedbackAndSaveToDB();
+    }
+
+    public void showFeedbacks() {
         this.feedbackInteractor.getFeedbackList(this::getFeedbackCallback);
     }
 
