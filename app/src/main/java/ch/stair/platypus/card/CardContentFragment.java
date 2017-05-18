@@ -1,6 +1,9 @@
 package ch.stair.platypus.card;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,15 +12,35 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Locale;
 
+import ch.stair.platypus.ABC;
 import ch.stair.platypus.App;
+import ch.stair.platypus.ObjectBoxRepository;
+import ch.stair.platypus.ObjectBoxStoreProvider;
+import ch.stair.platypus.Presenter;
 import ch.stair.platypus.R;
-import ch.stair.platypus.models.Feedback;
+import ch.stair.platypus.domain.CardViewModel;
+import ch.stair.platypus.domain.FeedbackInteractor;
+import ch.stair.platypus.domain.ICardView;
+import ch.stair.platypus.models.MyObjectBox;
+import io.objectbox.BoxStore;
 
-import static ch.stair.platypus.Helpers.getReadableDate;
+public class CardContentFragment extends Fragment implements ICardView {
 
-public class CardContentFragment extends Fragment {
+    private final Presenter presenter;
+    private final CardAdapter cardAdapter = null;
+    private RecyclerView recyclerView;
+
+    public CardContentFragment() {
+//        final Context context = ABC.get();
+//        this.cardAdapter = new CardAdapter(context);
+
+        final BoxStore boxStore = ObjectBoxStoreProvider.provide();
+        final ObjectBoxRepository objectBoxRepository = new ObjectBoxRepository(boxStore);
+        final FeedbackInteractor feedbackInteractor = new FeedbackInteractor(objectBoxRepository);
+        this.presenter = new Presenter(feedbackInteractor);
+    }
 
     @Override
     public View onCreateView(
@@ -25,24 +48,36 @@ public class CardContentFragment extends Fragment {
             final ViewGroup container,
             final Bundle savedInstanceState) {
 
-        final List<Feedback> comments = ((App) getActivity().getApplication())
-                .getBoxStore()
-                .boxFor(Feedback.class)
-                .getAll();
-        final List<CardViewModel> cardViewModels = comments
-                .stream()
-                .map(x ->
-                    new CardViewModel(x.getId(), x.getFeedbackText(),getReadableDate(x.getCreationDate()), x.getVotesCount()))
-                .collect(Collectors.toList());
-        final CardAdapter adapter = new CardAdapter(cardViewModels);
+        this.cardAdapter.setListener(cardViewModel -> {
+            if (this.presenter != null && cardViewModel != null) {
+                this.presenter.onCardViewClicked(cardViewModel);
+            }
+        });
 
-        final RecyclerView recyclerView =
-                (RecyclerView) inflater.inflate(R.layout.recycler_view, container, false);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
+        this.recyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view, container, false);
+        this.recyclerView.setHasFixedSize(true);
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        this.recyclerView.setAdapter(this.cardAdapter);
 
-        return recyclerView;
+        return this.recyclerView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        this.presenter.setView(this);
+        this.presenter.initialize();
+    }
+
+    @Override
+    public void showTestSnackbar(CardViewModel cardViewModel) {
+        String s = String.format(Locale.getDefault(), "id: %d, text: %s", cardViewModel.getId(), cardViewModel.getText());
+        Snackbar.make(this.recyclerView, s, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void renderCardViewModels(List<CardViewModel> cardViewModels) {
+        this.cardAdapter.setViewModels(cardViewModels);
     }
 }
 

@@ -1,31 +1,31 @@
-package ch.stair.platypus.card;
+package ch.stair.platypus.domain;
 
-class CardViewModel {
+public class CardViewModel {
     private final long id;
     private final String createdOn;
     private final String text;
     private final int voteCount;
 
-    CardViewModel(final long id, final String text, final String createdOn, final int voteCount) {
+    public CardViewModel(final long id, final String text, final String createdOn, final int voteCount) {
         this.id = id;
         this.text = text;
         this.createdOn = createdOn;
         this.voteCount = voteCount;
     }
 
-    long getId() {
+    public long getId() {
         return id;
     }
 
-    String getText() {
+    public String getText() {
         return text;
     }
 
-    String getCreatedOn() {
+    public String getCreatedOn() {
         return createdOn;
     }
 
-    int getVoteCount() {
+    public int getVoteCount() {
         return voteCount;
     }
 }

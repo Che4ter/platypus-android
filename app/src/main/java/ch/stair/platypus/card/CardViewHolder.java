@@ -10,13 +10,14 @@ import android.widget.TextView;
 import java.util.Random;
 
 import ch.stair.platypus.R;
+import ch.stair.platypus.domain.CardViewModel;
 
 class CardViewHolder extends RecyclerView.ViewHolder {
 
-    private final CardView card;
-    private final TextView text;
-    private final TextView creationDate;
-    private final TextView voteCount;
+    public final CardView card;
+    public final TextView text;
+    public final TextView creationDate;
+    public final TextView voteCount;
     private final CardViewHolderClickListener cardViewHolderClickListener;
     private long id = -1;
 

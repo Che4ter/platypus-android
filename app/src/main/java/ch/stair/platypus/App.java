@@ -2,6 +2,7 @@ package ch.stair.platypus;
 
 
 import android.app.Application;
+import android.content.Context;
 
 import ch.stair.platypus.models.Comments;
 import ch.stair.platypus.models.MyObjectBox;
@@ -15,7 +16,10 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
+        ABC.set(this);
+
         this.boxStore = MyObjectBox.builder().androidContext(App.this).build();
+        ObjectBoxStoreProvider.setup(boxStore);
         final Box<Comments> commentsBox = boxStore.boxFor(Comments.class);
         addDummyDataToDataBase(commentsBox);
     }
@@ -30,3 +34,4 @@ public class App extends Application {
         return boxStore;
     }
 }
+
