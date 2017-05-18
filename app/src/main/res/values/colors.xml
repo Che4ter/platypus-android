@@ -31,4 +31,19 @@
     <color name="cyan">#00bcd4</color>
 
 
+    <color name="loginprimary">#ffc107</color>
+    <color name="loginprimary_dark">#ffa000</color>
+    <color name="loginprimary_darker">#fb8c00</color>
+    <color name="loginaccent">#ffc107</color>
+
+    <color name="black">#000000</color>
+    <color name="jet">#222222</color>
+    <color name="oil">#333333</color>
+    <color name="monsoon">#777777</color>
+    <color name="jumbo">#888888</color>
+    <color name="aluminum">#999999</color>
+    <color name="base">#AAAAAA</color>
+    <color name="iron">#CCCCCC</color>
+    <color name="dd">#DDDDDD</color>
+
 </resources>

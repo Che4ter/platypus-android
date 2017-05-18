@@ -25,4 +25,27 @@
         <!-- Blue -->
     </style>
     <style name="AppTheme" parent="AppTheme.Base"></style>
+
+
+    <style name="LoginTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/loginprimary</item>
+        <item name="colorPrimaryDark">@color/loginprimary_dark</item>
+        <item name="colorAccent">@color/loginaccent</item>
+
+        <item name="android:windowBackground">@color/loginprimary</item>
+
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+
+        <item name="colorButtonNormal">@color/loginprimary_darker</item>
+        <item name="android:colorButtonNormal">@color/loginprimary_darker</item>
+    </style>
+
+    <style name="LoginTheme.Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:background">@color/loginprimary</item>
+    </style>
 </resources>

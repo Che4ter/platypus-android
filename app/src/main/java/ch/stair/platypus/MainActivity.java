@@ -40,6 +40,12 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
         this.setupViewPagerWith3Fragments();
         this.setupNavigationBarNavigation();
         this.createActionButton();
+
+        //Sample Code for get token
+        //AccountManager a = AccountManager.get(this);
+        //Account[] accounts = a.getAccountsByType(ACCOUNT_TYPE);
+        //String token= a.blockingGetAuthToken(accounts[0], AUTHTOKEN_TYPE_STUDENT_ACCESS, true);
+
     }
 
     private void initializeInjector() {
