@@ -14,7 +14,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,14 +22,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.stair.platypus.card.CardContentFragment;
+import ch.stair.platypus.di.HasComponent;
+import ch.stair.platypus.di.components.DaggerUserComponent;
+import ch.stair.platypus.di.components.UserComponent;
 import ch.stair.platypus.rest.SyncFeedbacks;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity implements HasComponent<UserComponent> {
+
+    private UserComponent userComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.initializeInjector();
 
         SyncFeedbacks s = new SyncFeedbacks(((App)getApplication()));
         s.fetchLatestFeedbacksToDB();
@@ -39,6 +45,18 @@ public class MainActivity extends AppCompatActivity {
         this.setupViewPagerWith3Fragments();
         this.setupNavigationBarNavigation();
         this.createActionButton();
+    }
+
+    private void initializeInjector() {
+        this.userComponent = DaggerUserComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
+                .build();
+    }
+
+    @Override
+    public UserComponent getComponent() {
+        return this.userComponent;
     }
 
     private void changeTopLeftIconInToolbarToFunctionAsNavigationBarOpener() {

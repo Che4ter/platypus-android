@@ -1,0 +1,35 @@
+package ch.stair.platypus.di.modules;
+
+import android.content.Context;
+import ch.stair.platypus.App;
+import ch.stair.platypus.ObjectBoxRepository;
+import ch.stair.platypus.domain.Repository;
+import dagger.Module;
+import dagger.Provides;
+import io.objectbox.BoxStore;
+
+import javax.inject.Singleton;
+
+/**
+ * Dagger module that provides objects which will live during the application lifecycle.
+ */
+@Module
+public class ApplicationModule {
+  private final App application;
+
+  public ApplicationModule(App application) {
+    this.application = application;
+  }
+
+  @Provides @Singleton Context provideApplicationContext() {
+    return this.application;
+  }
+
+//  @Provides @Singleton Repository provideRepository(ObjectBoxRepository objectBoxRepository) {
+//    return objectBoxRepository;
+//  }
+
+  @Provides @Singleton Repository providesRepository() {
+    return null;
+  }
+}

@@ -1,6 +1,5 @@
 package ch.stair.platypus.card;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -14,33 +13,22 @@ import android.view.ViewGroup;
 import java.util.List;
 import java.util.Locale;
 
-import ch.stair.platypus.ABC;
-import ch.stair.platypus.App;
-import ch.stair.platypus.ObjectBoxRepository;
-import ch.stair.platypus.ObjectBoxStoreProvider;
+import javax.inject.Inject;
+
 import ch.stair.platypus.Presenter;
 import ch.stair.platypus.R;
 import ch.stair.platypus.domain.CardViewModel;
-import ch.stair.platypus.domain.FeedbackInteractor;
 import ch.stair.platypus.domain.ICardView;
-import ch.stair.platypus.models.MyObjectBox;
-import io.objectbox.BoxStore;
 
 public class CardContentFragment extends Fragment implements ICardView {
 
-    private final Presenter presenter;
-    private final CardAdapter cardAdapter = null;
     private RecyclerView recyclerView;
 
-    public CardContentFragment() {
-//        final Context context = ABC.get();
-//        this.cardAdapter = new CardAdapter(context);
+    @Inject
+    Presenter presenter;
 
-        final BoxStore boxStore = ObjectBoxStoreProvider.provide();
-        final ObjectBoxRepository objectBoxRepository = new ObjectBoxRepository(boxStore);
-        final FeedbackInteractor feedbackInteractor = new FeedbackInteractor(objectBoxRepository);
-        this.presenter = new Presenter(feedbackInteractor);
-    }
+    @Inject
+    CardAdapter cardAdapter;
 
     @Override
     public View onCreateView(

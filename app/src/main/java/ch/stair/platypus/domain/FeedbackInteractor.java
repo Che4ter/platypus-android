@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import javax.inject.Inject;
+
 import ch.stair.platypus.Callback;
 import ch.stair.platypus.models.Feedback;
 
@@ -13,6 +15,7 @@ public class FeedbackInteractor {
 
     private Repository repository;
 
+    @Inject
     public FeedbackInteractor(final Repository repository) {
         this.repository = repository;
     }

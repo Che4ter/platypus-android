@@ -2,8 +2,10 @@ package ch.stair.platypus;
 
 
 import android.app.Application;
-import android.content.Context;
 
+import ch.stair.platypus.di.components.ApplicationComponent;
+import ch.stair.platypus.di.components.DaggerApplicationComponent;
+import ch.stair.platypus.di.modules.ApplicationModule;
 import ch.stair.platypus.models.Comments;
 import ch.stair.platypus.models.MyObjectBox;
 import io.objectbox.Box;
@@ -11,17 +13,28 @@ import io.objectbox.BoxStore;
 
 public class App extends Application {
     private BoxStore boxStore;
+    private ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        ABC.set(this);
+        this.initializeInjector();
 
         this.boxStore = MyObjectBox.builder().androidContext(App.this).build();
         ObjectBoxStoreProvider.setup(boxStore);
         final Box<Comments> commentsBox = boxStore.boxFor(Comments.class);
         addDummyDataToDataBase(commentsBox);
+    }
+
+    private void initializeInjector() {
+        this.applicationComponent = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this))
+                .build();
+    }
+
+    public ApplicationComponent getApplicationComponent() {
+        return this.applicationComponent;
     }
 
     private void addDummyDataToDataBase(final Box<Comments> commentsBox) {

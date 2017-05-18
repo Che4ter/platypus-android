@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import ch.stair.platypus.R;
 import ch.stair.platypus.domain.CardViewModel;
 
@@ -16,7 +18,7 @@ class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {
     private List<CardViewModel> comments;
     private CardViewListener listener;
 
-    CardAdapter(final Context context) {
+    @Inject CardAdapter() {
         this.comments = Collections.emptyList();
     }
 
