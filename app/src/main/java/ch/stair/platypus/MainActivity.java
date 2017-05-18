@@ -23,13 +23,12 @@ import java.util.List;
 
 import ch.stair.platypus.card.CardContentFragment;
 import ch.stair.platypus.di.HasComponent;
-import ch.stair.platypus.di.components.DaggerUserComponent;
-import ch.stair.platypus.di.components.UserComponent;
-import ch.stair.platypus.rest.SyncFeedbacks;
+import ch.stair.platypus.di.components.DaggerFeedbackComponent;
+import ch.stair.platypus.di.components.FeedbackComponent;
 
-public class MainActivity extends BaseActivity implements HasComponent<UserComponent> {
+public class MainActivity extends BaseActivity implements HasComponent<FeedbackComponent> {
 
-    private UserComponent userComponent;
+    private FeedbackComponent feedbackComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +47,15 @@ public class MainActivity extends BaseActivity implements HasComponent<UserCompo
     }
 
     private void initializeInjector() {
-        this.userComponent = DaggerUserComponent.builder()
+        this.feedbackComponent = DaggerFeedbackComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
                 .build();
     }
 
     @Override
-    public UserComponent getComponent() {
-        return this.userComponent;
+    public FeedbackComponent getComponent() {
+        return this.feedbackComponent;
     }
 
     private void changeTopLeftIconInToolbarToFunctionAsNavigationBarOpener() {

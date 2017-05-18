@@ -12,17 +12,17 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ch.stair.platypus.R;
-import ch.stair.platypus.domain.CardViewModel;
+import ch.stair.platypus.domain.FeedbackModel;
 
 class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {
-    private List<CardViewModel> comments;
+    private List<FeedbackModel> comments;
     private CardViewListener listener;
 
     @Inject CardAdapter() {
         this.comments = Collections.emptyList();
     }
 
-    void setViewModels(final List<CardViewModel> comments) {
+    void setViewModels(final List<FeedbackModel> comments) {
         this.comments = comments;
     }
 
@@ -37,7 +37,7 @@ class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {
 
     @Override
     public void onBindViewHolder(final CardViewHolder holder, final int position) {
-        CardViewModel viewModel = this.comments.get(position);
+        FeedbackModel viewModel = this.comments.get(position);
         holder.bindData(viewModel);
         holder.card.setOnClickListener(v -> {
             if (this.listener != null) {

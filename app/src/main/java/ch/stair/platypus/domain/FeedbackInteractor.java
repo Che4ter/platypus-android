@@ -20,11 +20,11 @@ public class FeedbackInteractor {
         this.repository = repository;
     }
 
-    public void getFeedbackList(Callback<List<CardViewModel>> callback) {
+    public void getFeedbackList(Callback<List<FeedbackModel>> callback) {
         final List<Feedback> feedbacks = this.repository.getAllFeedbacks();
-        final List<CardViewModel> cardViewModels = feedbacks
+        final List<FeedbackModel> cardViewModels = feedbacks
                 .stream()
-                .map(x -> new CardViewModel(x.getId(), x.getFeedbackText(),getReadableDate(x.getCreationDate()), x.getVotesCount()))
+                .map(x -> new FeedbackModel(x.getId(), x.getFeedbackText(),getReadableDate(x.getCreationDate()), x.getVotesCount()))
                 .collect(Collectors.toList());
 
         callback.callback(cardViewModels);

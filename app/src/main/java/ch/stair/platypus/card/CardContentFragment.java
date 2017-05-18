@@ -19,8 +19,8 @@ import javax.inject.Inject;
 import ch.stair.platypus.BaseFragment;
 import ch.stair.platypus.Presenter;
 import ch.stair.platypus.R;
-import ch.stair.platypus.di.components.UserComponent;
-import ch.stair.platypus.domain.CardViewModel;
+import ch.stair.platypus.di.components.FeedbackComponent;
+import ch.stair.platypus.domain.FeedbackModel;
 import ch.stair.platypus.domain.ICardView;
 
 public class CardContentFragment extends BaseFragment implements ICardView {
@@ -63,18 +63,18 @@ public class CardContentFragment extends BaseFragment implements ICardView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getComponent(UserComponent.class).inject(this);
+        this.getComponent(FeedbackComponent.class).inject(this);
     }
 
     @Override
-    public void showTestSnackbar(CardViewModel cardViewModel) {
+    public void showTestSnackbar(FeedbackModel cardViewModel) {
         String s = String.format(Locale.getDefault(), "id: %d, text: %s", cardViewModel.getId(), cardViewModel.getText());
         Snackbar.make(this.recyclerView, s, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
-    public void renderCardViewModels(List<CardViewModel> cardViewModels) {
-        this.cardAdapter.setViewModels(cardViewModels);
+    public void renderFeedbackModels(List<FeedbackModel> feedbackModelList) {
+        this.cardAdapter.setViewModels(feedbackModelList);
     }
 }
 

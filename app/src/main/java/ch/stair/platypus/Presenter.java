@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ch.stair.platypus.di.PerActivity;
-import ch.stair.platypus.domain.CardViewModel;
+import ch.stair.platypus.domain.FeedbackModel;
 import ch.stair.platypus.domain.FeedbackInteractor;
 import ch.stair.platypus.domain.ICardView;
 
@@ -22,7 +22,7 @@ public class Presenter {
         this.cardView = cardView;
     }
 
-    public void onCardViewClicked(CardViewModel cardViewModel) {
+    public void onCardViewClicked(FeedbackModel cardViewModel) {
         this.cardView.showTestSnackbar(cardViewModel);
     }
 
@@ -30,7 +30,7 @@ public class Presenter {
         this.feedbackInteractor.getFeedbackList(this::getFeedbackCallback);
     }
 
-    private void getFeedbackCallback(List<CardViewModel> viewModels) {
-        this.cardView.renderCardViewModels(viewModels);
+    private void getFeedbackCallback(List<FeedbackModel> viewModels) {
+        this.cardView.renderFeedbackModels(viewModels);
     }
 }

@@ -1,7 +1,7 @@
 package ch.stair.platypus.card;
 
-import ch.stair.platypus.domain.CardViewModel;
+import ch.stair.platypus.domain.FeedbackModel;
 
 public interface CardViewListener {
-    void onCardClicked(final CardViewModel cardViewModel);
+    void onCardClicked(final FeedbackModel cardViewModel);
 }
