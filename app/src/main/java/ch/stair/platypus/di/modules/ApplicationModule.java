@@ -4,6 +4,7 @@ import android.content.Context;
 import ch.stair.platypus.App;
 import ch.stair.platypus.ObjectBoxRepository;
 import ch.stair.platypus.domain.Repository;
+import ch.stair.platypus.models.MyObjectBox;
 import dagger.Module;
 import dagger.Provides;
 import io.objectbox.BoxStore;
@@ -25,11 +26,13 @@ public class ApplicationModule {
     return this.application;
   }
 
-//  @Provides @Singleton Repository provideRepository(ObjectBoxRepository objectBoxRepository) {
-//    return objectBoxRepository;
-//  }
+  @Provides @Singleton Repository provideRepository(final ObjectBoxRepository objectBoxRepository) {
+    return objectBoxRepository;
+  }
 
-  @Provides @Singleton Repository providesRepository() {
-    return null;
+  @Provides @Singleton BoxStore provideBoxStore() {
+    return MyObjectBox.builder()
+            .androidContext(this.application)
+            .build();
   }
 }

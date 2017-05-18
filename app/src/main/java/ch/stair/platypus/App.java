@@ -12,8 +12,9 @@ import io.objectbox.Box;
 import io.objectbox.BoxStore;
 
 public class App extends Application {
-    private BoxStore boxStore;
     private ApplicationComponent applicationComponent;
+
+    BoxStore boxStore;
 
     @Override
     public void onCreate() {
@@ -21,10 +22,8 @@ public class App extends Application {
 
         this.initializeInjector();
 
-        this.boxStore = MyObjectBox.builder().androidContext(App.this).build();
-        ObjectBoxStoreProvider.setup(boxStore);
-        final Box<Comments> commentsBox = boxStore.boxFor(Comments.class);
-        addDummyDataToDataBase(commentsBox);
+//        final Box<Comments> commentsBox = boxStore.boxFor(Comments.class);
+//        addDummyDataToDataBase(commentsBox);
     }
 
     private void initializeInjector() {

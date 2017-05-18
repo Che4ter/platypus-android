@@ -38,8 +38,8 @@ public class MainActivity extends BaseActivity implements HasComponent<UserCompo
 
         this.initializeInjector();
 
-        SyncFeedbacks s = new SyncFeedbacks(((App)getApplication()));
-        s.fetchLatestFeedbacksToDB();
+//        SyncFeedbacks s = new SyncFeedbacks(((App)getApplication()));
+//        s.fetchLatestFeedbacksToDB();
 
         this.changeTopLeftIconInToolbarToFunctionAsNavigationBarOpener();
         this.setupViewPagerWith3Fragments();

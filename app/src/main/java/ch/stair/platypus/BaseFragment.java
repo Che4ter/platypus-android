@@ -1,6 +1,6 @@
 package ch.stair.platypus;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import ch.stair.platypus.di.HasComponent;

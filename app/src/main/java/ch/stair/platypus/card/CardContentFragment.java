@@ -1,5 +1,6 @@
 package ch.stair.platypus.card;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -15,12 +16,14 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import ch.stair.platypus.BaseFragment;
 import ch.stair.platypus.Presenter;
 import ch.stair.platypus.R;
+import ch.stair.platypus.di.components.UserComponent;
 import ch.stair.platypus.domain.CardViewModel;
 import ch.stair.platypus.domain.ICardView;
 
-public class CardContentFragment extends Fragment implements ICardView {
+public class CardContentFragment extends BaseFragment implements ICardView {
 
     private RecyclerView recyclerView;
 
@@ -55,6 +58,12 @@ public class CardContentFragment extends Fragment implements ICardView {
         super.onViewCreated(view, savedInstanceState);
         this.presenter.setView(this);
         this.presenter.initialize();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.getComponent(UserComponent.class).inject(this);
     }
 
     @Override
