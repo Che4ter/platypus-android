@@ -10,13 +10,14 @@ import android.widget.TextView;
 import java.util.Random;
 
 import ch.stair.platypus.R;
+import ch.stair.platypus.domain.FeedbackModel;
 
 class CardViewHolder extends RecyclerView.ViewHolder {
 
-    private final CardView card;
-    private final TextView text;
-    private final TextView creationDate;
-    private final TextView voteCount;
+    public final CardView card;
+    public final TextView text;
+    public final TextView creationDate;
+    public final TextView voteCount;
     private final CardViewHolderClickListener cardViewHolderClickListener;
     private long id = -1;
 
@@ -40,7 +41,7 @@ class CardViewHolder extends RecyclerView.ViewHolder {
         setCardBackgroundToRandomColor(cardView);
     }
 
-    public void bindData(final CardViewModel viewModel) {
+    public void bindData(final FeedbackModel viewModel) {
         this.id = viewModel.getId();
         this.text.setText(viewModel.getText());
         this.creationDate.setText(viewModel.getCreatedOn());

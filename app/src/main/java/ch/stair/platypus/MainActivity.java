@@ -23,21 +23,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.stair.platypus.card.CardContentFragment;
-import ch.stair.platypus.rest.SyncFeedbacks;
+import ch.stair.platypus.di.HasComponent;
+import ch.stair.platypus.di.components.DaggerFeedbackComponent;
+import ch.stair.platypus.di.components.FeedbackComponent;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity implements HasComponent<FeedbackComponent> {
+
+    private FeedbackComponent feedbackComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SyncFeedbacks s = new SyncFeedbacks(((App)getApplication()));
-        s.fetchLatestFeedbacksToDB();
+        this.initializeInjector();
 
         this.changeTopLeftIconInToolbarToFunctionAsNavigationBarOpener();
         this.setupViewPagerWith3Fragments();
         this.setupNavigationBarNavigation();
         this.createActionButton();
+    }
+
+    private void initializeInjector() {
+        this.feedbackComponent = DaggerFeedbackComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
+                .build();
+    }
+
+    @Override
+    public FeedbackComponent getComponent() {
+        return this.feedbackComponent;
     }
 
     private void changeTopLeftIconInToolbarToFunctionAsNavigationBarOpener() {

@@ -5,6 +5,8 @@ import android.util.Log;
 import java.util.List;
 import java.util.stream.Stream;
 
+import javax.inject.Inject;
+
 import ch.stair.platypus.App;
 import ch.stair.platypus.PreferencesManager;
 import ch.stair.platypus.models.Feedback;
@@ -13,6 +15,7 @@ import ch.stair.platypus.models.FeedbackPOJO;
 import ch.stair.platypus.models.Hashtag;
 import ch.stair.platypus.models.HashtagPOJO;
 import io.objectbox.Box;
+import io.objectbox.BoxStore;
 import io.objectbox.exception.DbException;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,21 +26,15 @@ import static ch.stair.platypus.mapper.HashtagMapper.mapHashtagPOJOToHashtag;
 
 public class SyncFeedbacks {
 
-    final private PlatypusClient client;
-    final private Box<Feedback> feedbackBox;
-    final private Box<Hashtag> hashtagBox;
+    private PlatypusClient client;
+    private Box<Feedback> feedbackBox;
+    private Box<Hashtag> hashtagBox;
 
-    public SyncFeedbacks(App applicationContext) {
-
-        feedbackBox = applicationContext
-                .getBoxStore()
-                .boxFor(Feedback.class);
-
-        hashtagBox = applicationContext
-                .getBoxStore()
-                .boxFor(Hashtag.class);
-
-        client = ServiceGenerator.createService(PlatypusClient.class);
+    @Inject
+    public SyncFeedbacks(final BoxStore boxStore) {
+        this.feedbackBox = boxStore.boxFor(Feedback.class);
+        this.hashtagBox = boxStore.boxFor(Hashtag.class);
+        this.client = ServiceGenerator.createService(PlatypusClient.class);
     }
 
     public void fetchLatestFeedbacksToDB() {
@@ -69,7 +66,6 @@ public class SyncFeedbacks {
 
     private void saveNewFeedbacksToDB(List<FeedbackPOJO> newFeedbackPOJOs) {
         try {
-
             Stream<HashtagPOJO> allHashtagPOJOs = newFeedbackPOJOs.stream().flatMap(f -> f.getHashtags().stream()).distinct();
             allHashtagPOJOs.forEach(hashtagPOJO -> hashtagBox.put(mapHashtagPOJOToHashtag(hashtagPOJO)));
 

@@ -3,24 +3,30 @@ package ch.stair.platypus;
 
 import android.app.Application;
 
-import ch.stair.platypus.models.MyObjectBox;
-import io.objectbox.BoxStore;
+import ch.stair.platypus.di.components.ApplicationComponent;
+import ch.stair.platypus.di.components.DaggerApplicationComponent;
+import ch.stair.platypus.di.modules.ApplicationModule;
 
 public class App extends Application {
-    private BoxStore boxStore;
+    private ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        //Initialize ObjectBox DB
-        this.boxStore = MyObjectBox.builder().androidContext(App.this).build();
+        this.initializeInjector();
 
-        //Initialize Shared Preferences Manager
         PreferencesManager.initializeInstance(this.getApplicationContext());
     }
 
-    public BoxStore getBoxStore() {
-        return boxStore;
+    private void initializeInjector() {
+        this.applicationComponent = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this))
+                .build();
+    }
+
+    public ApplicationComponent getApplicationComponent() {
+        return this.applicationComponent;
     }
 }
+

@@ -1,7 +1,8 @@
 package ch.stair.platypus.card;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,15 +10,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Locale;
 
-import ch.stair.platypus.App;
+import javax.inject.Inject;
+
+import ch.stair.platypus.BaseFragment;
+import ch.stair.platypus.Presenter;
 import ch.stair.platypus.R;
-import ch.stair.platypus.models.Feedback;
+import ch.stair.platypus.di.components.FeedbackComponent;
+import ch.stair.platypus.domain.FeedbackModel;
+import ch.stair.platypus.domain.FeedbackCardView;
 
-import static ch.stair.platypus.Helpers.getReadableDate;
+public class CardContentFragment extends BaseFragment implements FeedbackCardView {
 
-public class CardContentFragment extends Fragment {
+    private RecyclerView recyclerView;
+
+    @Inject
+    Presenter presenter;
+
+    @Inject
+    CardAdapter cardAdapter;
 
     @Override
     public View onCreateView(
@@ -25,24 +37,43 @@ public class CardContentFragment extends Fragment {
             final ViewGroup container,
             final Bundle savedInstanceState) {
 
-        final List<Feedback> comments = ((App) getActivity().getApplication())
-                .getBoxStore()
-                .boxFor(Feedback.class)
-                .getAll();
-        final List<CardViewModel> cardViewModels = comments
-                .stream()
-                .map(x ->
-                    new CardViewModel(x.getId(), x.getFeedbackText(),getReadableDate(x.getCreationDate()), x.getVotesCount()))
-                .collect(Collectors.toList());
-        final CardAdapter adapter = new CardAdapter(cardViewModels);
+        this.cardAdapter.setListener(cardViewModel -> {
+            if (this.presenter != null && cardViewModel != null) {
+                this.presenter.onCardViewClicked(cardViewModel);
+            }
+        });
 
-        final RecyclerView recyclerView =
-                (RecyclerView) inflater.inflate(R.layout.recycler_view, container, false);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
+        this.recyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view, container, false);
+        this.recyclerView.setHasFixedSize(true);
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        this.recyclerView.setAdapter(this.cardAdapter);
 
-        return recyclerView;
+        return this.recyclerView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        this.presenter.setView(this);
+        this.presenter.showFeedbacks();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.getComponent(FeedbackComponent.class).inject(this);
+        this.presenter.initialize();
+    }
+
+    @Override
+    public void showTestSnackbar(FeedbackModel cardViewModel) {
+        String s = String.format(Locale.getDefault(), "id: %d, text: %s", cardViewModel.getId(), cardViewModel.getText());
+        Snackbar.make(this.recyclerView, s, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void renderFeedbackModels(List<FeedbackModel> feedbackModelList) {
+        this.cardAdapter.setViewModels(feedbackModelList);
     }
 }
 
