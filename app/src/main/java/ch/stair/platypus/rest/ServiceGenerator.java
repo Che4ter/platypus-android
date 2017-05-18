@@ -7,7 +7,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-class ServiceGenerator {
+public class ServiceGenerator {
     private static final String BASE_URL = "http://10.0.2.2:8080/api/v1/";
 
     private static final Gson gson = new GsonBuilder()

@@ -12,7 +12,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
-interface PlatypusClient {
+public interface PlatypusClient {
     @GET("feedback")
     Call<List<FeedbackPOJO>> getFeedback(
             @Query("lastsync") long date
