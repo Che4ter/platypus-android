@@ -22,8 +22,8 @@ public class Presenter {
         this.cardView = cardView;
     }
 
-    public void onCardViewClicked(FeedbackModel cardViewModel) {
-        this.cardView.showTestSnackbar(cardViewModel);
+    public void onCardViewClicked(FeedbackModel feedbackModel) {
+        this.cardView.showTestSnackbar(feedbackModel);
     }
 
     public void initialize() {
@@ -36,5 +36,13 @@ public class Presenter {
 
     private void getFeedbackCallback(List<FeedbackModel> viewModels) {
         this.cardView.renderFeedbackModels(viewModels);
+    }
+
+    public void onVoteUpClicked(FeedbackModel feedbackModel) {
+        this.cardView.showTestSnackbarForVoteUp(feedbackModel);
+    }
+
+    public void onVoteDownClicked(FeedbackModel feedbackModel) {
+        this.cardView.showTestSnackbarForVoteDown(feedbackModel);
     }
 }

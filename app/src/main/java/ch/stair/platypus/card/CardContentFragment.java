@@ -37,11 +37,7 @@ public class CardContentFragment extends BaseFragment implements FeedbackCardVie
             final ViewGroup container,
             final Bundle savedInstanceState) {
 
-        this.cardAdapter.setListener(cardViewModel -> {
-            if (this.presenter != null && cardViewModel != null) {
-                this.presenter.onCardViewClicked(cardViewModel);
-            }
-        });
+        this.cardAdapter.setListener(this.cardViewListener);
 
         this.recyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view, container, false);
         this.recyclerView.setHasFixedSize(true);
@@ -66,15 +62,63 @@ public class CardContentFragment extends BaseFragment implements FeedbackCardVie
     }
 
     @Override
-    public void showTestSnackbar(FeedbackModel cardViewModel) {
-        String s = String.format(Locale.getDefault(), "id: %d, text: %s", cardViewModel.getId(), cardViewModel.getText());
+    public void showTestSnackbar(FeedbackModel feedbackModel) {
+        String s = String.format(
+                Locale.getDefault(),
+                "id: %d, text: %s",
+                feedbackModel.getId(),
+                feedbackModel.getText());
         Snackbar.make(this.recyclerView, s, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showTestSnackbarForVoteUp(FeedbackModel feedbackModel) {
+        String text = String.format(
+                Locale.getDefault(),
+                "up vote on '%s' was pressed. VoteCount: %s",
+                feedbackModel.getText(),
+                feedbackModel.getVoteCount());
+        Snackbar.make(this.recyclerView, text, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showTestSnackbarForVoteDown(FeedbackModel feedbackModel) {
+        String text = String.format(
+                Locale.getDefault(),
+                "down vote on '%s' was pressed. VoteCount: %s",
+                feedbackModel.getText(),
+                feedbackModel.getVoteCount());
+        Snackbar.make(this.recyclerView, text, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void renderFeedbackModels(List<FeedbackModel> feedbackModelList) {
         this.cardAdapter.setViewModels(feedbackModelList);
     }
+
+    private CardViewListener cardViewListener =
+            new CardViewListener() {
+                @Override
+                public void onCardClicked(FeedbackModel feedbackModel) {
+                    if (CardContentFragment.this.presenter != null && feedbackModel != null) {
+                        CardContentFragment.this.presenter.onCardViewClicked(feedbackModel);
+                    }
+                }
+
+                @Override
+                public void voteUpClicked(View cardView, FeedbackModel feedbackModel) {
+                    if (CardContentFragment.this.presenter != null && feedbackModel != null) {
+                        CardContentFragment.this.presenter.onVoteUpClicked(feedbackModel);
+                    }
+                }
+
+                @Override
+                public void voteDownClicked(View cardView, FeedbackModel feedbackModel) {
+                    if (CardContentFragment.this.presenter != null && feedbackModel != null) {
+                        CardContentFragment.this.presenter.onVoteDownClicked(feedbackModel);
+                    }
+                }
+            };
 }
 
 

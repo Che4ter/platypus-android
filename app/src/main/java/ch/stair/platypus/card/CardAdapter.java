@@ -1,6 +1,5 @@
 package ch.stair.platypus.card;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,20 +27,30 @@ class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {
 
     @Override
     public CardViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
-        final CardViewHolderClickListener cardViewHolderClickListener = new CardViewHolderClickListenerImpl();
         final View view = LayoutInflater
                 .from(parent.getContext())
                 .inflate(viewType, parent, false);
-        return new CardViewHolder(view, cardViewHolderClickListener);
+        return new CardViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final CardViewHolder holder, final int position) {
         FeedbackModel viewModel = this.comments.get(position);
         holder.bindData(viewModel);
+
         holder.card.setOnClickListener(v -> {
             if (this.listener != null) {
                 this.listener.onCardClicked(viewModel);
+            }
+        });
+        holder.voteUp.setOnClickListener(v -> {
+            if (this.listener != null) {
+                this.listener.voteUpClicked(v, viewModel);
+            }
+        });
+        holder.voteDown.setOnClickListener(v -> {
+            if (this.listener != null) {
+                this.listener.voteDownClicked(v, viewModel);
             }
         });
     }
