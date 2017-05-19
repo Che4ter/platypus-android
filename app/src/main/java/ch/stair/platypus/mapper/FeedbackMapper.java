@@ -1,7 +1,7 @@
 package ch.stair.platypus.mapper;
 
-import ch.stair.platypus.models.Feedback;
-import ch.stair.platypus.models.FeedbackPOJO;
+import ch.stair.platypus.repository.models.Feedback;
+import ch.stair.platypus.rest.model.FeedbackPOJO;
 
 public final class FeedbackMapper {
     private FeedbackMapper(){}

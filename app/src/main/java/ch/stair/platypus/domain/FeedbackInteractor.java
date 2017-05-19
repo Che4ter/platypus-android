@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
-import ch.stair.platypus.Callback;
-import ch.stair.platypus.models.Feedback;
+import ch.stair.platypus.presentation.Callback;
+import ch.stair.platypus.repository.models.Feedback;
 import ch.stair.platypus.rest.SyncFeedbacks;
 
 public class FeedbackInteractor {

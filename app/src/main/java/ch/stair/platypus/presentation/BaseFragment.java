@@ -1,4 +1,4 @@
-package ch.stair.platypus;
+package ch.stair.platypus.presentation;
 
 import android.support.v4.app.Fragment;
 

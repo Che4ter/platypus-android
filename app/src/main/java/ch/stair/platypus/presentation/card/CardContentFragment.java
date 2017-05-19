@@ -1,4 +1,4 @@
-package ch.stair.platypus.card;
+package ch.stair.platypus.presentation.card;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,12 +14,12 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-import ch.stair.platypus.BaseFragment;
-import ch.stair.platypus.Presenter;
+import ch.stair.platypus.presentation.BaseFragment;
 import ch.stair.platypus.R;
 import ch.stair.platypus.di.components.FeedbackComponent;
 import ch.stair.platypus.domain.FeedbackModel;
 import ch.stair.platypus.domain.FeedbackCardView;
+import ch.stair.platypus.presentation.Presenter;
 
 public class CardContentFragment extends BaseFragment implements FeedbackCardView {
 

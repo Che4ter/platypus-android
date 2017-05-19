@@ -1,8 +1,9 @@
-package ch.stair.platypus;
+package ch.stair.platypus.presentation;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import ch.stair.platypus.App;
 import ch.stair.platypus.di.components.ApplicationComponent;
 import ch.stair.platypus.di.modules.ActivityModule;
 

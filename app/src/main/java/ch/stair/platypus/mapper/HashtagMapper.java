@@ -1,7 +1,7 @@
 package ch.stair.platypus.mapper;
 
-import ch.stair.platypus.models.Hashtag;
-import ch.stair.platypus.models.HashtagPOJO;
+import ch.stair.platypus.repository.models.Hashtag;
+import ch.stair.platypus.rest.model.HashtagPOJO;
 
 public final class HashtagMapper {
     private HashtagMapper(){}

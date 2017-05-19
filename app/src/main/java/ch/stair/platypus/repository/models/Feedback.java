@@ -1,4 +1,4 @@
-package ch.stair.platypus.models;
+package ch.stair.platypus.repository.models;
 
 import java.util.Date;
 import java.util.List;

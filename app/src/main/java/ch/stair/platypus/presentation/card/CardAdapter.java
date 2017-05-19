@@ -1,4 +1,4 @@
-package ch.stair.platypus.card;
+package ch.stair.platypus.presentation.card;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ch.stair.platypus.R;
-import ch.stair.platypus.ReadableDateConverter;
+import ch.stair.platypus.presentation.ReadableDateConverter;
 import ch.stair.platypus.domain.FeedbackModel;
 
 class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {

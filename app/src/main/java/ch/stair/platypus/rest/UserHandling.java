@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.google.gson.JsonObject;
 
-import ch.stair.platypus.models.RegistrationLoginPOJO;
+import ch.stair.platypus.rest.model.RegistrationLoginPOJO;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

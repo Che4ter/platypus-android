@@ -1,10 +1,12 @@
-package ch.stair.platypus;
+package ch.stair.platypus.presentation;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
+
+import ch.stair.platypus.R;
 
 public class DetailActivity extends AppCompatActivity {
 

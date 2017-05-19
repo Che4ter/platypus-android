@@ -1,4 +1,4 @@
-package ch.stair.platypus.card;
+package ch.stair.platypus.presentation.card;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,17 +9,17 @@ import android.widget.TextView;
 import java.util.Random;
 
 import ch.stair.platypus.R;
-import ch.stair.platypus.ReadableDateConverter;
+import ch.stair.platypus.presentation.ReadableDateConverter;
 import ch.stair.platypus.domain.FeedbackModel;
 
 class CardViewHolder extends RecyclerView.ViewHolder {
 
-    public final CardView card;
-    public final TextView text;
-    public final TextView creationDate;
-    public final TextView voteCount;
-    public final ImageButton voteUp;
-    public final ImageButton voteDown;
+    final CardView card;
+    final TextView text;
+    final TextView creationDate;
+    final TextView voteCount;
+    final ImageButton voteUp;
+    final ImageButton voteDown;
     private final ReadableDateConverter readableDateConverter;
 
     public CardViewHolder(final View cardView, final ReadableDateConverter readableDateConverter) {

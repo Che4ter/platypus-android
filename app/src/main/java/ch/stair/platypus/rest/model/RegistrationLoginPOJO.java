@@ -1,4 +1,4 @@
-package ch.stair.platypus.models;
+package ch.stair.platypus.rest.model;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -1,4 +1,4 @@
-package ch.stair.platypus;
+package ch.stair.platypus.presentation;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,9 +20,10 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.stair.platypus.R;
 import ch.stair.platypus.authentication.AccountGeneral;
 import ch.stair.platypus.authentication.AccountHandling;
-import ch.stair.platypus.card.CardContentFragment;
+import ch.stair.platypus.presentation.card.CardContentFragment;
 import ch.stair.platypus.di.HasComponent;
 import ch.stair.platypus.di.components.DaggerFeedbackComponent;
 import ch.stair.platypus.di.components.FeedbackComponent;

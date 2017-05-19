@@ -2,9 +2,9 @@ package ch.stair.platypus.di.modules;
 
 import android.content.Context;
 import ch.stair.platypus.App;
-import ch.stair.platypus.ObjectBoxRepository;
+import ch.stair.platypus.repository.ObjectBoxRepository;
 import ch.stair.platypus.domain.Repository;
-import ch.stair.platypus.models.MyObjectBox;
+import ch.stair.platypus.repository.models.MyObjectBox;
 import dagger.Module;
 import dagger.Provides;
 import io.objectbox.BoxStore;

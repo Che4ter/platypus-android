@@ -2,7 +2,7 @@ package ch.stair.platypus.di.components;
 
 import javax.inject.Singleton;
 
-import ch.stair.platypus.BaseActivity;
+import ch.stair.platypus.presentation.BaseActivity;
 import ch.stair.platypus.di.modules.ApplicationModule;
 import ch.stair.platypus.domain.Repository;
 import dagger.Component;

@@ -8,11 +8,11 @@ import java.util.stream.Stream;
 import javax.inject.Inject;
 
 import ch.stair.platypus.PreferencesManager;
-import ch.stair.platypus.models.Feedback;
-import ch.stair.platypus.models.FeedbackHashtag;
-import ch.stair.platypus.models.FeedbackPOJO;
-import ch.stair.platypus.models.Hashtag;
-import ch.stair.platypus.models.HashtagPOJO;
+import ch.stair.platypus.repository.models.Feedback;
+import ch.stair.platypus.repository.models.FeedbackHashtag;
+import ch.stair.platypus.repository.models.Hashtag;
+import ch.stair.platypus.rest.model.FeedbackPOJO;
+import ch.stair.platypus.rest.model.HashtagPOJO;
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
 import io.objectbox.exception.DbException;
