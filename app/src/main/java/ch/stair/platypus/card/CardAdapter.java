@@ -17,7 +17,8 @@ class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {
     private List<FeedbackModel> comments;
     private CardViewListener listener;
 
-    @Inject CardAdapter() {
+    @Inject
+    CardAdapter() {
         this.comments = Collections.emptyList();
     }
 

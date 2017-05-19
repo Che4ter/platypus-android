@@ -14,7 +14,8 @@ public class Presenter {
     private final FeedbackInteractor feedbackInteractor;
     private FeedbackCardView cardView;
 
-    @Inject public Presenter(final FeedbackInteractor feedbackInteractor) {
+    @Inject
+    public Presenter(final FeedbackInteractor feedbackInteractor) {
         this.feedbackInteractor = feedbackInteractor;
     }
 

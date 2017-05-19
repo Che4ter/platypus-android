@@ -19,11 +19,15 @@ public class ApplicationModule {
     this.application = application;
   }
 
-  @Provides @Singleton Context provideApplicationContext() {
+  @Provides
+  @Singleton
+  Context provideApplicationContext() {
     return this.application;
   }
 
-  @Provides @Singleton Repository provideRepository(final ObjectBoxRepository objectBoxRepository) {
+  @Provides
+  @Singleton
+  Repository provideRepository(final ObjectBoxRepository objectBoxRepository) {
     return objectBoxRepository;
   }
 
