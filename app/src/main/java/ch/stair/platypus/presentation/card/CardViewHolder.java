@@ -9,15 +9,14 @@ import android.widget.TextView;
 import java.util.Random;
 
 import ch.stair.platypus.R;
-import ch.stair.platypus.presentation.ReadableDateConverter;
 import ch.stair.platypus.domain.FeedbackModel;
 
 class CardViewHolder extends RecyclerView.ViewHolder {
 
     final CardView card;
-    final TextView text;
-    final TextView creationDate;
-    final TextView voteCount;
+    private final TextView text;
+    private final TextView creationDate;
+    private final TextView voteCount;
     final ImageButton voteUp;
     final ImageButton voteDown;
     private final ReadableDateConverter readableDateConverter;

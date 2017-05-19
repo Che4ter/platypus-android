@@ -1,6 +1,8 @@
-package ch.stair.platypus.domain;
+package ch.stair.platypus.presentation.card;
 
 import java.util.List;
+
+import ch.stair.platypus.domain.FeedbackModel;
 
 public interface FeedbackCardView {
     void renderFeedbackModels(List<FeedbackModel> feedbackModelList);

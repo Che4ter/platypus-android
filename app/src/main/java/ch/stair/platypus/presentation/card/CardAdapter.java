@@ -11,7 +11,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ch.stair.platypus.R;
-import ch.stair.platypus.presentation.ReadableDateConverter;
 import ch.stair.platypus.domain.FeedbackModel;
 
 class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {

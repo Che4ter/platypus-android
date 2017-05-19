@@ -1,4 +1,4 @@
-package ch.stair.platypus.presentation;
+package ch.stair.platypus.presentation.card;
 
 import java.util.Date;
 

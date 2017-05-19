@@ -3,6 +3,7 @@ package ch.stair.platypus.presentation.card;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,13 +15,12 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-import ch.stair.platypus.presentation.BaseFragment;
 import ch.stair.platypus.R;
+import ch.stair.platypus.di.HasComponent;
 import ch.stair.platypus.di.components.FeedbackComponent;
 import ch.stair.platypus.domain.FeedbackModel;
-import ch.stair.platypus.domain.FeedbackCardView;
 
-public class CardContentFragment extends BaseFragment implements FeedbackCardView {
+public class CardContentFragment extends Fragment implements FeedbackCardView {
 
     private RecyclerView recyclerView;
 
@@ -56,7 +56,9 @@ public class CardContentFragment extends BaseFragment implements FeedbackCardVie
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getComponent(FeedbackComponent.class).inject(this);
+        FeedbackComponent.class.cast(((HasComponent<FeedbackComponent>) getActivity())
+                .getComponent())
+                .inject(this);
         this.feedbackPresenter.initialize();
     }
 

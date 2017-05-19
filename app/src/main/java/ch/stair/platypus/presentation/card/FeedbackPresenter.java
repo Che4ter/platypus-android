@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import ch.stair.platypus.di.PerActivity;
 import ch.stair.platypus.domain.FeedbackModel;
 import ch.stair.platypus.domain.FeedbackInteractor;
-import ch.stair.platypus.domain.FeedbackCardView;
 
 @PerActivity
 public class FeedbackPresenter {
@@ -19,11 +18,11 @@ public class FeedbackPresenter {
         this.feedbackInteractor = feedbackInteractor;
     }
 
-    public void setView(FeedbackCardView cardView) {
+    public void setView(final FeedbackCardView cardView) {
         this.cardView = cardView;
     }
 
-    public void onCardViewClicked(FeedbackModel feedbackModel) {
+    public void onCardViewClicked(final FeedbackModel feedbackModel) {
         this.cardView.showTestSnackbar(feedbackModel);
     }
 
