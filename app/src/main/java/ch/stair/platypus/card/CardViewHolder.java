@@ -9,6 +9,7 @@ import android.widget.TextView;
 import java.util.Random;
 
 import ch.stair.platypus.R;
+import ch.stair.platypus.ReadableDateConverter;
 import ch.stair.platypus.domain.FeedbackModel;
 
 class CardViewHolder extends RecyclerView.ViewHolder {
@@ -19,8 +20,9 @@ class CardViewHolder extends RecyclerView.ViewHolder {
     public final TextView voteCount;
     public final ImageButton voteUp;
     public final ImageButton voteDown;
+    private final ReadableDateConverter readableDateConverter;
 
-    public CardViewHolder(final View cardView) {
+    public CardViewHolder(final View cardView, final ReadableDateConverter readableDateConverter) {
         super(cardView);
 
         this.card = (CardView) cardView.findViewById(R.id.card_view);
@@ -29,13 +31,14 @@ class CardViewHolder extends RecyclerView.ViewHolder {
         this.voteCount = (TextView) cardView.findViewById(R.id.card_voteCount);
         this.voteUp = (ImageButton) cardView.findViewById(R.id.upvote_button);
         this.voteDown = (ImageButton) cardView.findViewById(R.id.downvote_button);
+        this.readableDateConverter = readableDateConverter;
 
         setCardBackgroundToRandomColor(cardView);
     }
 
     public void bindData(final FeedbackModel viewModel) {
         this.text.setText(viewModel.getText());
-        this.creationDate.setText(viewModel.getCreatedOn());
+        this.creationDate.setText(this.readableDateConverter.convert(viewModel.getCreatedOn()));
         this.voteCount.setText(String.valueOf(viewModel.getVoteCount()));
     }
 

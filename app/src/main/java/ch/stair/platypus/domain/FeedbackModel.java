@@ -1,15 +1,17 @@
 package ch.stair.platypus.domain;
 
+import java.util.Date;
+
 public class FeedbackModel {
     private final long id;
-    private final String createdOn;
+    private final Date createdOn;
     private final String text;
     private final int voteCount;
 
     public FeedbackModel(
             final long id,
             final String text,
-            final String createdOn,
+            final Date createdOn,
             final int voteCount) {
         this.id = id;
         this.text = text;
@@ -25,7 +27,7 @@ public class FeedbackModel {
         return text;
     }
 
-    public String getCreatedOn() {
+    public Date getCreatedOn() {
         return createdOn;
     }
 

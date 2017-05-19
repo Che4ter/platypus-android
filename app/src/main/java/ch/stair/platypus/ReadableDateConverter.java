@@ -2,8 +2,14 @@ package ch.stair.platypus;
 
 import java.util.Date;
 
-public final class Helpers {
-    public static String getReadableDate(Date uglyDate) {
+import javax.inject.Inject;
+
+public class ReadableDateConverter {
+
+    @Inject
+    ReadableDateConverter() {}
+
+    public String convert(Date uglyDate) {
         int diffInDays;
 
         //todo: use utc time

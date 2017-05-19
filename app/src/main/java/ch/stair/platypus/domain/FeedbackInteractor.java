@@ -9,8 +9,6 @@ import ch.stair.platypus.Callback;
 import ch.stair.platypus.models.Feedback;
 import ch.stair.platypus.rest.SyncFeedbacks;
 
-import static ch.stair.platypus.Helpers.getReadableDate;
-
 public class FeedbackInteractor {
 
     private final Repository repository;
@@ -32,7 +30,7 @@ public class FeedbackInteractor {
         final List<Feedback> feedbacks = this.repository.getAllFeedbacks();
         final List<FeedbackModel> cardViewModels = feedbacks
                 .stream()
-                .map(x -> new FeedbackModel(x.getId(), x.getFeedbackText(),getReadableDate(x.getCreationDate()), x.getVotesCount()))
+                .map(x -> new FeedbackModel(x.getId(), x.getFeedbackText(), x.getCreationDate(), x.getVotesCount()))
                 .collect(Collectors.toList());
 
         callback.callback(cardViewModels);

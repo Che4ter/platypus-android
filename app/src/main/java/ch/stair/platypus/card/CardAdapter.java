@@ -11,14 +11,17 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ch.stair.platypus.R;
+import ch.stair.platypus.ReadableDateConverter;
 import ch.stair.platypus.domain.FeedbackModel;
 
 class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {
+    private final ReadableDateConverter readableDateConverter;
     private List<FeedbackModel> comments;
     private CardViewListener listener;
 
-    @Inject
-    CardAdapter() {
+    @Inject 
+    CardAdapter(ReadableDateConverter readableDateConverter) {
+        this.readableDateConverter = readableDateConverter;
         this.comments = Collections.emptyList();
     }
 
@@ -31,7 +34,7 @@ class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {
         final View view = LayoutInflater
                 .from(parent.getContext())
                 .inflate(viewType, parent, false);
-        return new CardViewHolder(view);
+        return new CardViewHolder(view, readableDateConverter);
     }
 
     @Override
