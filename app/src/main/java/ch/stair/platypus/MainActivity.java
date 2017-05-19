@@ -3,7 +3,6 @@ package ch.stair.platypus;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
@@ -21,6 +20,8 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.stair.platypus.authentication.AccountGeneral;
+import ch.stair.platypus.authentication.AccountHandling;
 import ch.stair.platypus.card.CardContentFragment;
 import ch.stair.platypus.di.HasComponent;
 import ch.stair.platypus.di.components.DaggerFeedbackComponent;
@@ -40,12 +41,6 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
         this.setupViewPagerWith3Fragments();
         this.setupNavigationBarNavigation();
         this.createActionButton();
-
-        //Sample Code for get token
-        //AccountManager a = AccountManager.get(this);
-        //Account[] accounts = a.getAccountsByType(ACCOUNT_TYPE);
-        //String token= a.blockingGetAuthToken(accounts[0], AUTHTOKEN_TYPE_STUDENT_ACCESS, true);
-
     }
 
     private void initializeInjector() {
@@ -107,8 +102,10 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
 
     private void createActionButton() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(v ->
-                Snackbar.make(v, "Hello Snackbar!", Snackbar.LENGTH_LONG).show());
+        fab.setOnClickListener(v -> {
+            AccountHandling auth = new AccountHandling(this);
+            auth.getTokenForAccountCreateIfNeeded(AccountGeneral.ACCOUNT_TYPE,AccountGeneral.AUTHTOKEN_TYPE_STUDENT_ACCESS,this,v);
+        });
     }
 
     @Override

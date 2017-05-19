@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
 
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -36,14 +37,10 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".authentication.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:parentActivityName=".MainActivity">
-        </activity>
-        <!--<activity
         android:name=".authentication.LoginActivity"
         android:label="@string/title_activity_login"
-        android:parentActivityName=".MainActivity">
+        android:parentActivityName=".MainActivity"
+            android:theme="@style/LoginTheme">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="ch.stair.platypus.MainActivity" />

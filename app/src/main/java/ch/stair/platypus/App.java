@@ -17,6 +17,7 @@ public class App extends Application {
         this.initializeInjector();
 
         PreferencesManager.initializeInstance(this.getApplicationContext());
+
     }
 
     private void initializeInjector() {
@@ -28,5 +29,6 @@ public class App extends Application {
     public ApplicationComponent getApplicationComponent() {
         return this.applicationComponent;
     }
+
 }
 

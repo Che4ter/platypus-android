@@ -74,7 +74,7 @@ public class LoginActivity extends AccountAuthenticatorActivity implements Loade
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        setTheme(R.style.LoginTheme);
         mAccountManager = AccountManager.get(getBaseContext());
         String accountName = getIntent().getStringExtra(ARG_ACCOUNT_NAME);
         String mAuthTokenType = getIntent().getStringExtra(ARG_AUTH_TYPE);

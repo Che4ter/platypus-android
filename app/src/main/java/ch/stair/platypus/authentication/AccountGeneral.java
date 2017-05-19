@@ -19,4 +19,6 @@ public class AccountGeneral {
 
     public static final ServerAuthenticate sServerAuthenticate = new ServerAuthentication();
 
+    public static boolean UserLoggedIn;
+
 }

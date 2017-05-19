@@ -4,14 +4,20 @@ import android.accounts.AbstractAccountAuthenticator;
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorResponse;
 import android.accounts.AccountManager;
+import android.accounts.AuthenticatorException;
 import android.accounts.NetworkErrorException;
+import android.accounts.OperationCanceledException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import java.io.IOException;
+
 import static android.accounts.AccountManager.KEY_BOOLEAN_RESULT;
+import static ch.stair.platypus.authentication.AccountGeneral.ACCOUNT_TYPE;
+import static ch.stair.platypus.authentication.AccountGeneral.AUTHTOKEN_TYPE_STUDENT_ACCESS;
 import static ch.stair.platypus.authentication.AccountGeneral.sServerAuthenticate;
 
 class PlatypusAuthenticator extends AbstractAccountAuthenticator {
@@ -119,5 +125,26 @@ class PlatypusAuthenticator extends AbstractAccountAuthenticator {
     @Override
     public Bundle updateCredentials(AccountAuthenticatorResponse response, Account account, String authTokenType, Bundle options) throws NetworkErrorException {
         return null;
+    }
+
+    public boolean getLoginStatus(){
+        AccountManager a = AccountManager.get(mContext);
+        Account[] accounts = a.getAccountsByType(ACCOUNT_TYPE);
+        if(accounts != null && accounts.length>0){
+            String token = null;
+            try {
+                token = a.blockingGetAuthToken(accounts[0], AUTHTOKEN_TYPE_STUDENT_ACCESS,false);
+            } catch (OperationCanceledException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (AuthenticatorException e) {
+                e.printStackTrace();
+            }
+            if(!token.isEmpty()){
+                return true;
+            }
+        }
+        return false;
     }
 }
