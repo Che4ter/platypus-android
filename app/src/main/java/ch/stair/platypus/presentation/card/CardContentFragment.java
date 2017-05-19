@@ -19,14 +19,13 @@ import ch.stair.platypus.R;
 import ch.stair.platypus.di.components.FeedbackComponent;
 import ch.stair.platypus.domain.FeedbackModel;
 import ch.stair.platypus.domain.FeedbackCardView;
-import ch.stair.platypus.presentation.Presenter;
 
 public class CardContentFragment extends BaseFragment implements FeedbackCardView {
 
     private RecyclerView recyclerView;
 
     @Inject
-    Presenter presenter;
+    FeedbackPresenter feedbackPresenter;
 
     @Inject
     CardAdapter cardAdapter;
@@ -50,15 +49,15 @@ public class CardContentFragment extends BaseFragment implements FeedbackCardVie
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.presenter.setView(this);
-        this.presenter.showFeedbacks();
+        this.feedbackPresenter.setView(this);
+        this.feedbackPresenter.showFeedbacks();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getComponent(FeedbackComponent.class).inject(this);
-        this.presenter.initialize();
+        this.feedbackPresenter.initialize();
     }
 
     @Override
@@ -100,22 +99,22 @@ public class CardContentFragment extends BaseFragment implements FeedbackCardVie
             new CardViewListener() {
                 @Override
                 public void onCardClicked(final FeedbackModel feedbackModel) {
-                    if (CardContentFragment.this.presenter != null && feedbackModel != null) {
-                        CardContentFragment.this.presenter.onCardViewClicked(feedbackModel);
+                    if (CardContentFragment.this.feedbackPresenter != null && feedbackModel != null) {
+                        CardContentFragment.this.feedbackPresenter.onCardViewClicked(feedbackModel);
                     }
                 }
 
                 @Override
                 public void voteUpClicked(final FeedbackModel feedbackModel) {
-                    if (CardContentFragment.this.presenter != null && feedbackModel != null) {
-                        CardContentFragment.this.presenter.onVoteUpClicked(feedbackModel);
+                    if (CardContentFragment.this.feedbackPresenter != null && feedbackModel != null) {
+                        CardContentFragment.this.feedbackPresenter.onVoteUpClicked(feedbackModel);
                     }
                 }
 
                 @Override
                 public void voteDownClicked(final FeedbackModel feedbackModel) {
-                    if (CardContentFragment.this.presenter != null && feedbackModel != null) {
-                        CardContentFragment.this.presenter.onVoteDownClicked(feedbackModel);
+                    if (CardContentFragment.this.feedbackPresenter != null && feedbackModel != null) {
+                        CardContentFragment.this.feedbackPresenter.onVoteDownClicked(feedbackModel);
                     }
                 }
             };

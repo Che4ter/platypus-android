@@ -1,4 +1,4 @@
-package ch.stair.platypus.presentation;
+package ch.stair.platypus.presentation.card;
 
 import java.util.List;
 
@@ -10,12 +10,12 @@ import ch.stair.platypus.domain.FeedbackInteractor;
 import ch.stair.platypus.domain.FeedbackCardView;
 
 @PerActivity
-public class Presenter {
+public class FeedbackPresenter {
     private final FeedbackInteractor feedbackInteractor;
     private FeedbackCardView cardView;
 
     @Inject
-    public Presenter(final FeedbackInteractor feedbackInteractor) {
+    public FeedbackPresenter(final FeedbackInteractor feedbackInteractor) {
         this.feedbackInteractor = feedbackInteractor;
     }
 
