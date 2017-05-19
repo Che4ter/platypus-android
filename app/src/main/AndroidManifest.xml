@@ -44,7 +44,8 @@
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="ch.stair.platypus.presentation.MainActivity" />
-    </activity>-->
+    </activity>
+        <activity android:name=".presentation.feedbackcreation.CreateFeedbackActivity" />-->
         <service android:name=".authentication.PlatypusAuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />

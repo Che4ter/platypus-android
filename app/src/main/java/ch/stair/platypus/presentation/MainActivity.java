@@ -1,5 +1,6 @@
 package ch.stair.platypus.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -23,10 +24,11 @@ import java.util.List;
 import ch.stair.platypus.R;
 import ch.stair.platypus.authentication.AccountGeneral;
 import ch.stair.platypus.authentication.AccountHandling;
-import ch.stair.platypus.presentation.card.CardContentFragment;
 import ch.stair.platypus.di.HasComponent;
 import ch.stair.platypus.di.components.DaggerFeedbackComponent;
 import ch.stair.platypus.di.components.FeedbackComponent;
+import ch.stair.platypus.presentation.card.CardContentFragment;
+import ch.stair.platypus.presentation.feedbackcreation.CreateFeedbackActivity;
 
 public class MainActivity extends BaseActivity implements HasComponent<FeedbackComponent> {
 
@@ -105,7 +107,11 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
             AccountHandling auth = new AccountHandling(this);
-            auth.getTokenForAccountCreateIfNeeded(AccountGeneral.ACCOUNT_TYPE,AccountGeneral.AUTHTOKEN_TYPE_STUDENT_ACCESS,this,v);
+            auth.getTokenForAccountCreateIfNeeded(AccountGeneral.ACCOUNT_TYPE, AccountGeneral.AUTHTOKEN_TYPE_STUDENT_ACCESS, this, v);
+
+            // TODO wtjerry: decide whether a login screen shall be shown first and then forward to the create feedback screen, or if being logged in is a precondition
+//            Intent intentToLaunch = CreateFeedbackActivity.getCallingIntent(this);
+//            this.startActivity(intentToLaunch);
         });
     }
 
