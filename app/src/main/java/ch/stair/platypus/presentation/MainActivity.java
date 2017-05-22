@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.stair.platypus.App;
 import ch.stair.platypus.R;
 import ch.stair.platypus.authentication.AccountGeneral;
 import ch.stair.platypus.authentication.AccountHandling;
@@ -29,6 +30,7 @@ import ch.stair.platypus.di.components.DaggerFeedbackComponent;
 import ch.stair.platypus.di.components.FeedbackComponent;
 import ch.stair.platypus.presentation.card.CardContentFragment;
 import ch.stair.platypus.presentation.feedbackcreation.CreateFeedbackActivity;
+import ch.stair.platypus.rest.FeedbackHandling;
 
 public class MainActivity extends BaseActivity implements HasComponent<FeedbackComponent> {
 
@@ -76,16 +78,16 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         final Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new CardContentFragment());
-        adapter.addFragment(new ListContentFragment());
-        adapter.addFragment(new ListContentFragment());
+        //adapter.addFragment(new ListContentFragment());
+        //adapter.addFragment(new ListContentFragment());
         viewPager.setAdapter(adapter);
 
         final TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
         tabs.getTabAt(0).setIcon(R.drawable.ic_tab_home);
-        tabs.getTabAt(1).setIcon(R.drawable.ic_tab_search);
-        tabs.getTabAt(2).setIcon(R.drawable.ic_tab_notifications);
+        //tabs.getTabAt(1).setIcon(R.drawable.ic_tab_search);
+        //tabs.getTabAt(2).setIcon(R.drawable.ic_tab_notifications);
     }
 
     private void setupNavigationBarNavigation() {

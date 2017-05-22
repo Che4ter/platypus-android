@@ -19,6 +19,7 @@ import ch.stair.platypus.R;
 import ch.stair.platypus.di.HasComponent;
 import ch.stair.platypus.di.components.FeedbackComponent;
 import ch.stair.platypus.domain.FeedbackModel;
+import ch.stair.platypus.rest.FeedbackHandling;
 
 public class CardContentFragment extends Fragment implements FeedbackCardView {
 
@@ -79,6 +80,8 @@ public class CardContentFragment extends Fragment implements FeedbackCardView {
                 "up vote on '%s' was pressed. VoteCount: %s",
                 feedbackModel.getText(),
                 feedbackModel.getVoteCount());
+                FeedbackHandling handle = new FeedbackHandling();
+                handle.voteOnFeedback(feedbackModel.getId(),1);
         Snackbar.make(this.recyclerView, text, Snackbar.LENGTH_LONG).show();
     }
 
@@ -89,6 +92,8 @@ public class CardContentFragment extends Fragment implements FeedbackCardView {
                 "down vote on '%s' was pressed. VoteCount: %s",
                 feedbackModel.getText(),
                 feedbackModel.getVoteCount());
+                FeedbackHandling handle = new FeedbackHandling();
+                handle.voteOnFeedback(feedbackModel.getId(),0);
         Snackbar.make(this.recyclerView, text, Snackbar.LENGTH_LONG).show();
     }
 

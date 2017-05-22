@@ -6,10 +6,13 @@ import java.util.List;
 
 import ch.stair.platypus.rest.model.FeedbackPOJO;
 import ch.stair.platypus.rest.model.RegistrationLoginPOJO;
+import ch.stair.platypus.rest.model.VotePOJO;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 interface PlatypusClient {
@@ -23,4 +26,10 @@ interface PlatypusClient {
 
     @POST("auth/token")
     Call<JsonObject> loginUser(@Body RegistrationLoginPOJO userCreationPOJO);
+
+    @POST("auth/feedback/vote/{id}")
+    Call<JsonObject> voteOnComment(@Path("id") long feedbackId,
+                                   @Header("Authorization") String jwt_token,
+                                   @Body VotePOJO votePOJO);
+
 }
