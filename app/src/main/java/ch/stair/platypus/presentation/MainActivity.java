@@ -116,12 +116,12 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
     private void createActionButton() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
-            AccountHandling auth = new AccountHandling(this);
-            auth.getTokenForAccountCreateIfNeeded(AccountGeneral.ACCOUNT_TYPE, AccountGeneral.AUTHTOKEN_TYPE_STUDENT_ACCESS, this, v);
+//            AccountHandling auth = new AccountHandling(this);
+//            auth.getTokenForAccountCreateIfNeeded(AccountGeneral.ACCOUNT_TYPE, AccountGeneral.AUTHTOKEN_TYPE_STUDENT_ACCESS, this, v);
 
             // TODO wtjerry: decide whether a login screen shall be shown first and then forward to the create feedback screen, or if being logged in is a precondition
-//            Intent intentToLaunch = CreateFeedbackActivity.getCallingIntent(this);
-//            this.startActivity(intentToLaunch);
+            Intent intentToLaunch = CreateFeedbackActivity.getCallingIntent(this);
+            this.startActivity(intentToLaunch);
         });
     }
 
