@@ -6,13 +6,13 @@ import android.os.Bundle;
 
 import ch.stair.platypus.R;
 import ch.stair.platypus.di.HasComponent;
-import ch.stair.platypus.di.components.CreateFeedbackComponent;
-import ch.stair.platypus.di.components.DaggerCreateFeedbackComponent;
+import ch.stair.platypus.di.components.DaggerFeedbackComponent;
+import ch.stair.platypus.di.components.FeedbackComponent;
 import ch.stair.platypus.presentation.BaseActivity;
 
-public class CreateFeedbackActivity extends BaseActivity implements HasComponent<CreateFeedbackComponent> {
+public class CreateFeedbackActivity extends BaseActivity implements HasComponent<FeedbackComponent> {
 
-    private CreateFeedbackComponent createFeedbackComponent;
+    private FeedbackComponent feedbackComponent;
 
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, CreateFeedbackActivity.class);
@@ -27,14 +27,14 @@ public class CreateFeedbackActivity extends BaseActivity implements HasComponent
     }
 
     private void initializeInjector() {
-        this.createFeedbackComponent = DaggerCreateFeedbackComponent.builder()
+        this.feedbackComponent = DaggerFeedbackComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
                 .build();
     }
 
     @Override
-    public CreateFeedbackComponent getComponent() {
-        return this.createFeedbackComponent;
+    public FeedbackComponent getComponent() {
+        return this.feedbackComponent;
     }
 }

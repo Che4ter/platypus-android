@@ -13,7 +13,7 @@ import javax.inject.Inject;
 
 import ch.stair.platypus.R;
 import ch.stair.platypus.di.HasComponent;
-import ch.stair.platypus.di.components.CreateFeedbackComponent;
+import ch.stair.platypus.di.components.FeedbackComponent;
 import ch.stair.platypus.domain.CreateFeedbackModel;
 
 public class CreateFeedbackFragment extends Fragment implements CreateFeedbackView {
@@ -50,7 +50,7 @@ public class CreateFeedbackFragment extends Fragment implements CreateFeedbackVi
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CreateFeedbackComponent.class.cast(((HasComponent<CreateFeedbackComponent>) getActivity())
+        FeedbackComponent.class.cast(((HasComponent<FeedbackComponent>) getActivity())
                 .getComponent())
                 .inject(this);
     }
