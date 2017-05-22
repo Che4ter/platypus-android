@@ -13,6 +13,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -88,6 +89,13 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
         tabs.getTabAt(0).setIcon(R.drawable.ic_tab_home);
         //tabs.getTabAt(1).setIcon(R.drawable.ic_tab_search);
         //tabs.getTabAt(2).setIcon(R.drawable.ic_tab_notifications);
+
+        final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        refreshLayout.setOnRefreshListener(() -> {
+            Refreshable r = (Refreshable) adapter.getItem(viewPager.getCurrentItem());
+            r.refresh();
+            refreshLayout.setRefreshing(false);
+        });
     }
 
     private void setupNavigationBarNavigation() {

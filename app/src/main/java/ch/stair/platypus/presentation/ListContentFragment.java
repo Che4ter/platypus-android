@@ -16,7 +16,7 @@ import ch.stair.platypus.R;
 /**
  * Provides UI for the view with List.
  */
-public class ListContentFragment extends Fragment {
+public class ListContentFragment extends Fragment implements Refreshable {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,6 +28,10 @@ public class ListContentFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return recyclerView;
+    }
+
+    @Override
+    public void refresh() {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

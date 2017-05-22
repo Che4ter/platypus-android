@@ -19,9 +19,10 @@ import ch.stair.platypus.R;
 import ch.stair.platypus.di.HasComponent;
 import ch.stair.platypus.di.components.FeedbackComponent;
 import ch.stair.platypus.domain.FeedbackModel;
+import ch.stair.platypus.presentation.Refreshable;
 import ch.stair.platypus.rest.FeedbackHandling;
 
-public class CardContentFragment extends Fragment implements FeedbackCardView {
+public class CardContentFragment extends Fragment implements FeedbackCardView, Refreshable {
 
     private RecyclerView recyclerView;
 
@@ -125,6 +126,12 @@ public class CardContentFragment extends Fragment implements FeedbackCardView {
                     }
                 }
             };
+
+    @Override
+    public void refresh() {
+        this.feedbackPresenter.initialize();
+        this.feedbackPresenter.showFeedbacks();
+    }
 }
 
 
