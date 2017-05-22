@@ -48,4 +48,8 @@
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:background">@color/loginprimary</item>
     </style>
+
+    <style name="CardTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/white</item>
+    </style>
 </resources>
