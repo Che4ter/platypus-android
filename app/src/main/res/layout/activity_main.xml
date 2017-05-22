@@ -59,8 +59,10 @@
             android:layout_gravity="right|bottom"
             android:layout_marginBottom="@dimen/md_keylines"
             android:layout_marginRight="@dimen/md_keylines"
-            app:srcCompat="@drawable/ic_add"
-            android:tint="@color/white"/>
+            android:backgroundTint="#3f51b5"
+            android:tint="@color/white"
+            app:backgroundTint="#3f51b5"
+            app:srcCompat="@drawable/ic_add" />
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
