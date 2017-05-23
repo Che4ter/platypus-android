@@ -1,23 +1,25 @@
 package ch.stair.platypus.domain;
 
 import java.util.List;
+import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
-import ch.stair.platypus.presentation.Callback;
 import ch.stair.platypus.repository.models.Feedback;
 import ch.stair.platypus.rest.SyncFeedbacks;
 
-public class FeedbackInteractor {
+public class FeedbackInteractor extends Interactor<List<FeedbackModel>, Void> {
 
     private final Repository repository;
     private final SyncFeedbacks syncFeedbacks;
 
     @Inject
     public FeedbackInteractor(
+            final Executor executor,
             final Repository repository,
             final SyncFeedbacks syncFeedbacks) {
+        super(executor);
         this.repository = repository;
         this.syncFeedbacks = syncFeedbacks;
     }
@@ -26,13 +28,13 @@ public class FeedbackInteractor {
         this.syncFeedbacks.fetchLatestFeedbacksToDB();
     }
 
-    public void getFeedbackList(final Callback<List<FeedbackModel>> callback) {
+    @Override
+    protected List<FeedbackModel> execute(Void unused) {
         final List<Feedback> feedbacks = this.repository.getAllFeedbacks();
         final List<FeedbackModel> cardViewModels = feedbacks
                 .stream()
                 .map(x -> new FeedbackModel(x.getId(), x.getFeedbackText(), x.getCreationDate(), x.getVotesCount()))
                 .collect(Collectors.toList());
-
-        callback.callback(cardViewModels);
+        return cardViewModels;
     }
 }

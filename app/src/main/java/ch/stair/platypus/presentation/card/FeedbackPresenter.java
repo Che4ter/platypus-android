@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import ch.stair.platypus.di.PerActivity;
 import ch.stair.platypus.domain.FeedbackModel;
 import ch.stair.platypus.domain.FeedbackInteractor;
+import ch.stair.platypus.domain.Observer;
+import ch.stair.platypus.presentation.feedbackcreation.CreateFeedbackPresenter;
 
 @PerActivity
 public class FeedbackPresenter {
@@ -31,11 +33,7 @@ public class FeedbackPresenter {
     }
 
     public void showFeedbacks() {
-        this.feedbackInteractor.getFeedbackList(this::getFeedbackCallback);
-    }
-
-    private void getFeedbackCallback(List<FeedbackModel> viewModels) {
-        this.cardView.renderFeedbackModels(viewModels);
+        this.feedbackInteractor.execute(observer, null);
     }
 
     public void onVoteUpClicked(FeedbackModel feedbackModel) {
@@ -45,4 +43,11 @@ public class FeedbackPresenter {
     public void onVoteDownClicked(FeedbackModel feedbackModel) {
         this.cardView.showTestSnackbarForVoteDown(feedbackModel);
     }
+
+    private Observer<List<FeedbackModel>> observer = new Observer<List<FeedbackModel>>() {
+        @Override
+        public void onFinished(List<FeedbackModel> viewModels) {
+            FeedbackPresenter.this.cardView.renderFeedbackModels(viewModels);
+        }
+    };
 }
