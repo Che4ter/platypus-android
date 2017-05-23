@@ -8,10 +8,10 @@ import dagger.Provides;
 @Module
 public class FeedbackModule {
 
-  public FeedbackModule() {}
+    public FeedbackModule() {}
 
-  @Provides
-  RemoteService provideRemoteService(final RemoteServiceImpl remoteService) {
+    @Provides
+    RemoteService provideRemoteService(final RemoteServiceImpl remoteService) {
     return remoteService;
-  }
+    }
 }

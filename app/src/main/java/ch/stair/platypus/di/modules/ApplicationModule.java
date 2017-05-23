@@ -1,5 +1,6 @@
 package ch.stair.platypus.di.modules;
 
+import android.accounts.AccountManager;
 import android.content.Context;
 import ch.stair.platypus.App;
 import ch.stair.platypus.repository.ObjectBoxRepository;
@@ -37,5 +38,10 @@ public class ApplicationModule {
     return MyObjectBox.builder()
             .androidContext(this.application)
             .build();
+  }
+
+  @Provides
+  AccountManager provideAccountManager(final Context context) {
+    return AccountManager.get(context);
   }
 }

@@ -1,5 +1,8 @@
 package ch.stair.platypus.di.components;
 
+import android.accounts.AccountManager;
+import android.content.Context;
+
 import javax.inject.Singleton;
 
 import ch.stair.platypus.presentation.BaseActivity;
@@ -14,4 +17,5 @@ public interface ApplicationComponent {
   void inject(BaseActivity baseActivity);
   Repository repository();
   BoxStore boxStore();
+  AccountManager accountManager();
 }

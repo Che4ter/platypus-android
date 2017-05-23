@@ -5,7 +5,6 @@ import javax.inject.Inject;
 import ch.stair.platypus.di.PerActivity;
 import ch.stair.platypus.domain.CreateFeedbackModel;
 import ch.stair.platypus.domain.FeedbackInteractor;
-import ch.stair.platypus.presentation.RemoteService;
 
 @PerActivity
 public class CreateFeedbackPresenter {
@@ -22,7 +21,7 @@ public class CreateFeedbackPresenter {
     }
 
 
-    public void createFeedback(CreateFeedbackModel createFeedbackModel) {
+    public void createFeedback(final CreateFeedbackModel createFeedbackModel) {
         this.feedbackInteractor.createFeedback(createFeedbackModel);
         this.createFeedbackView.closeView();
     }
