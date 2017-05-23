@@ -3,6 +3,8 @@ package ch.stair.platypus.di.components;
 import android.accounts.AccountManager;
 import android.content.Context;
 
+import java.util.concurrent.Executor;
+
 import javax.inject.Singleton;
 
 import ch.stair.platypus.presentation.BaseActivity;
@@ -18,4 +20,5 @@ public interface ApplicationComponent {
   Repository repository();
   BoxStore boxStore();
   AccountManager accountManager();
+  Executor executor();
 }

@@ -2,6 +2,10 @@ package ch.stair.platypus.di.modules;
 
 import android.accounts.AccountManager;
 import android.content.Context;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 import ch.stair.platypus.App;
 import ch.stair.platypus.repository.ObjectBoxRepository;
 import ch.stair.platypus.domain.Repository;
@@ -43,5 +47,10 @@ public class ApplicationModule {
   @Provides
   AccountManager provideAccountManager(final Context context) {
     return AccountManager.get(context);
+  }
+
+  @Provides
+  Executor provideExecutor() {
+    return Executors.newCachedThreadPool();
   }
 }
