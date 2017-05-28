@@ -22,7 +22,6 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.stair.platypus.App;
 import ch.stair.platypus.R;
 import ch.stair.platypus.authentication.AccountGeneral;
 import ch.stair.platypus.authentication.AccountHandling;
@@ -31,7 +30,6 @@ import ch.stair.platypus.di.components.DaggerFeedbackComponent;
 import ch.stair.platypus.di.components.FeedbackComponent;
 import ch.stair.platypus.presentation.card.CardContentFragment;
 import ch.stair.platypus.presentation.feedbackcreation.CreateFeedbackActivity;
-import ch.stair.platypus.rest.FeedbackHandling;
 
 public class MainActivity extends BaseActivity implements HasComponent<FeedbackComponent> {
 
@@ -107,7 +105,8 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
                     menuItem.setChecked(true);
 
                     // TODO: handle navigation
-
+                    AccountHandling auth = new AccountHandling(this);
+                    auth.getTokenForAccountCreateIfNeeded(AccountGeneral.ACCOUNT_TYPE, AccountGeneral.AUTHTOKEN_TYPE_STUDENT_ACCESS, this, findViewById(R.id.drawer));
                     mDrawerLayout.closeDrawers();
                     return true;
                 });
@@ -116,9 +115,6 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
     private void createActionButton() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
-//            AccountHandling auth = new AccountHandling(this);
-//            auth.getTokenForAccountCreateIfNeeded(AccountGeneral.ACCOUNT_TYPE, AccountGeneral.AUTHTOKEN_TYPE_STUDENT_ACCESS, this, v);
-
             // TODO wtjerry: decide whether a login screen shall be shown first and then forward to the create feedback screen, or if being logged in is a precondition
             Intent intentToLaunch = CreateFeedbackActivity.getCallingIntent(this);
             this.startActivity(intentToLaunch);
