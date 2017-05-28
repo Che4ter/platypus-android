@@ -22,25 +22,25 @@ public class ReadableDateConverter {
         diffInDays = (int) (diff / (1000 * 60 * 60 * 24));
         if (diffInDays > 0) {
             if (diffInDays == 1) {
-                readableDate = diffInDays + " day ago";
+                readableDate = diffInDays + " d";
             } else {
-                readableDate = diffInDays + " days ago";
+                readableDate = diffInDays + " d";
             }
         } else {
             int diffHours = (int) (diff / (60 * 60 * 1000));
             if (diffHours > 0) {
                 if (diffHours == 1) {
-                    readableDate = diffHours + " hr ago";
+                    readableDate = diffHours + " h";
                 } else {
-                    readableDate = diffHours + " hrs ago";
+                    readableDate = diffHours + " h";
                 }
             } else {
 
                 int diffMinutes = (int) ((diff / (60 * 1000) % 60));
                 if (diffMinutes == 1) {
-                    readableDate = diffMinutes + " min ago";
+                    readableDate = diffMinutes + " m";
                 } else {
-                    readableDate = diffMinutes + " mins ago";
+                    readableDate = diffMinutes + " m";
                 }
             }
         }
