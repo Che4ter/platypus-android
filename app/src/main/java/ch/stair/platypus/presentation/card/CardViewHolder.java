@@ -17,6 +17,7 @@ class CardViewHolder extends RecyclerView.ViewHolder {
     private final TextView text;
     private final TextView creationDate;
     private final TextView voteCount;
+    private final TextView hashtags;
     final ImageButton voteUp;
     final ImageButton voteDown;
     private final ReadableDateConverter readableDateConverter;
@@ -30,6 +31,7 @@ class CardViewHolder extends RecyclerView.ViewHolder {
         this.voteCount = (TextView) cardView.findViewById(R.id.card_voteCount);
         this.voteUp = (ImageButton) cardView.findViewById(R.id.upvote_button);
         this.voteDown = (ImageButton) cardView.findViewById(R.id.downvote_button);
+        this.hashtags = (TextView) cardView.findViewById(R.id.coment_hashtags);
         this.readableDateConverter = readableDateConverter;
 
         setCardBackgroundToRandomColor(cardView);
@@ -39,6 +41,7 @@ class CardViewHolder extends RecyclerView.ViewHolder {
         this.text.setText(viewModel.getText());
         this.creationDate.setText(this.readableDateConverter.convert(viewModel.getCreatedOn()));
         this.voteCount.setText(String.valueOf(viewModel.getVoteCount()));
+        this.hashtags.setText(viewModel.getHashtags());
     }
 
     private void setCardBackgroundToRandomColor(final View itemView) {
