@@ -33,20 +33,22 @@ public class SyncFeedbacks {
     public SyncFeedbacks(final BoxStore boxStore) {
         this.feedbackBox = boxStore.boxFor(Feedback.class);
         this.hashtagBox = boxStore.boxFor(Hashtag.class);
+
         this.client = ServiceGenerator.createService(PlatypusClient.class);
     }
 
     public void fetchLatestFeedbacksToDB() {
         Call<List<FeedbackPOJO>> call = client.getFeedback(getLastSyncDate());
+
         call.enqueue(new Callback<List<FeedbackPOJO>>() {
 
             @Override
             public void onResponse(Call<List<FeedbackPOJO>> call, Response<List<FeedbackPOJO>> response) {
                 if (response.isSuccessful()) {
-                    setLastSyncDate();
                     // tasks available
                     Log.d("Debug", "Response is Successful");
                     if (!response.body().isEmpty()) {
+                        setLastSyncDate();
                         saveNewFeedbacksToDB(response.body());
                     }
 
@@ -70,9 +72,15 @@ public class SyncFeedbacks {
 
             for (FeedbackPOJO updatedFeedbackPOJO : newFeedbackPOJOs) {
                 Feedback updatedFeedback = mapFeedbackPOJOToFeedback(updatedFeedbackPOJO);
+
                 feedbackBox.put(updatedFeedback);
 
-                updatedFeedback.feedbackHashtagses.clear();
+                if(updatedFeedback.feedbackHashtagses != null && updatedFeedback.feedbackHashtagses.size() > 0){
+                    updatedFeedback.feedbackHashtagses.clear();
+
+                }
+
+
 
                 for (HashtagPOJO hashtagPOJO : updatedFeedbackPOJO.getHashtags()) {
                     updatedFeedback.feedbackHashtagses.add(new FeedbackHashtag(0, updatedFeedback.getId(), hashtagPOJO.getId()));
