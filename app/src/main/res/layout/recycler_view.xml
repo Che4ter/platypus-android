@@ -22,6 +22,6 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:paddingBottom="@dimen/md_keylines"
-    android:paddingTop="@dimen/md_keylines"
+    android:paddingTop="120dp"
     android:scrollbars="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
