@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 
 import java.util.List;
 
+import ch.stair.platypus.rest.model.FeedbackCreationPOJO;
 import ch.stair.platypus.rest.model.FeedbackPOJO;
 import ch.stair.platypus.rest.model.RegistrationLoginPOJO;
 import ch.stair.platypus.rest.model.VotePOJO;
@@ -31,5 +32,8 @@ interface PlatypusClient {
     Call<JsonObject> voteOnComment(@Path("id") long feedbackId,
                                    @Header("Authorization") String jwt_token,
                                    @Body VotePOJO votePOJO);
+    @POST("feedback")
+    Call<JsonObject> createFeedback(@Header("Authorization") String jwt_token,
+                                    @Body FeedbackCreationPOJO feedbackCreationPOJO);
 
 }

@@ -14,8 +14,11 @@ public class HashtagPOJO {
     @SerializedName("last_modified")
     private Date lastModified;
 
-    public HashtagPOJO() {
-
+    public HashtagPOJO(Integer id, String hashText, Integer hashTypesId, Date lastModified) {
+        this.id = id;
+        this.hashText = hashText;
+        this.hashTypesId = hashTypesId;
+        this.lastModified = lastModified;
     }
 
     public Integer getId() {

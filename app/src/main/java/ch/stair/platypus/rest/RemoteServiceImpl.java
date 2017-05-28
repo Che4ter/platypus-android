@@ -27,6 +27,8 @@ public class RemoteServiceImpl implements RemoteService{
         try {
             final String token = this.authenticationManager.getToken();
             if (token != null) {
+                FeedbackHandling newFeedback = new FeedbackHandling();
+                newFeedback.createFeedback(createFeedbackModel, token);
                 wasSuccessful = true;
             }
         } catch (AuthenticatorException | OperationCanceledException | IOException e) {

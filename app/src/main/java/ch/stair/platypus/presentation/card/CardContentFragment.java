@@ -76,26 +76,33 @@ public class CardContentFragment extends Fragment implements FeedbackCardView, R
 
     @Override
     public void showTestSnackbarForVoteUp(FeedbackModel feedbackModel) {
-        String text = String.format(
-                Locale.getDefault(),
-                "up vote on '%s' was pressed. VoteCount: %s",
-                feedbackModel.getText(),
-                feedbackModel.getVoteCount());
+        String text = String.format("Successfully up voted");
                 FeedbackHandling handle = new FeedbackHandling();
-                handle.voteOnFeedback(feedbackModel.getId(),1);
-        Snackbar.make(this.recyclerView, text, Snackbar.LENGTH_LONG).show();
+        try {
+            handle.voteOnFeedback(feedbackModel.getId(),1,this.getContext());
+            Snackbar.make(this.recyclerView, text, Snackbar.LENGTH_LONG).show();
+            feedbackModel.upVote();
+
+        } catch (Exception e) {
+
+            Snackbar.make(this.recyclerView, "Could not vote", Snackbar.LENGTH_LONG).show();
+
+        }
     }
 
     @Override
     public void showTestSnackbarForVoteDown(FeedbackModel feedbackModel) {
-        String text = String.format(
-                Locale.getDefault(),
-                "down vote on '%s' was pressed. VoteCount: %s",
-                feedbackModel.getText(),
-                feedbackModel.getVoteCount());
-                FeedbackHandling handle = new FeedbackHandling();
-                handle.voteOnFeedback(feedbackModel.getId(),0);
-        Snackbar.make(this.recyclerView, text, Snackbar.LENGTH_LONG).show();
+        String text = String.format("Successfully down voted");
+        FeedbackHandling handle = new FeedbackHandling();
+        try {
+            handle.voteOnFeedback(feedbackModel.getId(),0,this.getContext());
+            Snackbar.make(this.recyclerView, text, Snackbar.LENGTH_LONG).show();
+            feedbackModel.downVote();
+        } catch (Exception e) {
+
+            Snackbar.make(this.recyclerView, "Could not vote", Snackbar.LENGTH_LONG).show();
+
+        }
     }
 
     @Override
