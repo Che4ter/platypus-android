@@ -133,6 +133,8 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
 
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_refresh) {
+            return true;
         } else if (id == android.R.id.home) {
             final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
             mDrawerLayout.openDrawer(GravityCompat.START);
