@@ -95,13 +95,14 @@ public class SyncFeedbacks {
     }
 
     private long getLastSyncDate() {
-        PreferencesManager prefManager = PreferencesManager.getInstance();
+        final PreferencesManager prefManager = PreferencesManager.getInstance();
         return prefManager.getLongValue(PreferencesManager.KEYS.LAST_SYNC);
     }
 
     private void setLastSyncDate() {
-        PreferencesManager prefManager = PreferencesManager.getInstance();
-        long newSyncDate = (System.currentTimeMillis() / 1000L) - (5L * 60L); //Substract 5min for time differences between server and client
-        prefManager.setValue(PreferencesManager.KEYS.LAST_SYNC,newSyncDate);
+        final PreferencesManager prefManager = PreferencesManager.getInstance();
+        final int FiveMinutesServerAndClientTimeDifferenceBuffer = 5 * 60;
+        final long lastSync = (System.currentTimeMillis() / 1000L) - FiveMinutesServerAndClientTimeDifferenceBuffer;
+        prefManager.setValue(PreferencesManager.KEYS.LAST_SYNC, lastSync);
     }
 }

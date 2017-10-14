@@ -1,7 +1,6 @@
 package ch.stair.platypus.di.components;
 
 import android.accounts.AccountManager;
-import android.content.Context;
 
 import java.util.concurrent.Executor;
 

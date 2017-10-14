@@ -30,19 +30,7 @@ public class FeedbackInteractor extends Interactor<List<FeedbackModel>, Void> {
 
     @Override
     protected List<FeedbackModel> execute(Void unused) {
-        final List<Feedback> feedbacks = this.repository.getAllFeedbacks();
-
-        final List<FeedbackModel> cardViewModels = feedbacks
-                .stream()
-                .map(x -> new FeedbackModel(
-                        x.getId(),
-                        x.getFeedbackText(),
-                        x.getCreationDate(),
-                        x.getVotesCount(),
-                        x.feedbackHashtagses
-                        )
-                )
-                .collect(Collectors.toList());
-        return cardViewModels;
+        final List<FeedbackModel> feedbacks = this.repository.getAllFeedbacks();
+        return feedbacks;
     }
 }
