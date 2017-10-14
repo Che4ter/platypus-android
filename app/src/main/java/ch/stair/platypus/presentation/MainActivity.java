@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -42,9 +41,10 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
         this.initializeInjector();
 
         this.changeTopLeftIconInToolbarToFunctionAsNavigationBarOpener();
-        this.setupViewPagerWith3Fragments();
-        this.setupNavigationBarNavigation();
-        this.createActionButton();
+        this.setupTabs();
+        this.setupSwipeRefresh();
+        this.setupNavigationBar();
+        this.setupCreateFeedbackActionButton();
     }
 
     private void initializeInjector() {
@@ -73,21 +73,21 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
         }
     }
 
-    private void setupViewPagerWith3Fragments() {
+    private void setupTabs() {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         final Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new CardContentFragment());
-        //adapter.addFragment(new ListContentFragment());
-        //adapter.addFragment(new ListContentFragment());
         viewPager.setAdapter(adapter);
 
         final TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
         tabs.getTabAt(0).setIcon(R.drawable.ic_tab_home);
-        //tabs.getTabAt(1).setIcon(R.drawable.ic_tab_search);
-        //tabs.getTabAt(2).setIcon(R.drawable.ic_tab_notifications);
+    }
 
+    private void setupSwipeRefresh() {
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        final Adapter adapter = (Adapter) viewPager.getAdapter();
         final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         refreshLayout.setOnRefreshListener(() -> {
             Refreshable r = (Refreshable) adapter.getItem(viewPager.getCurrentItem());
@@ -96,7 +96,7 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
         });
     }
 
-    private void setupNavigationBarNavigation() {
+    private void setupNavigationBar() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
@@ -106,13 +106,17 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
 
                     // TODO: handle navigation
                     AccountHandling auth = new AccountHandling(this);
-                    auth.getTokenForAccountCreateIfNeeded(AccountGeneral.ACCOUNT_TYPE, AccountGeneral.AUTHTOKEN_TYPE_STUDENT_ACCESS, this, findViewById(R.id.drawer));
+                    auth.getTokenForAccountCreateIfNeeded(
+                            AccountGeneral.ACCOUNT_TYPE,
+                            AccountGeneral.AUTHTOKEN_TYPE_STUDENT_ACCESS,
+                            this,
+                            findViewById(R.id.drawer));
                     mDrawerLayout.closeDrawers();
                     return true;
                 });
     }
 
-    private void createActionButton() {
+    private void setupCreateFeedbackActionButton() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
             // TODO wtjerry: decide whether a login screen shall be shown first and then forward to the create feedback screen, or if being logged in is a precondition
@@ -130,14 +134,8 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_refresh) {
             return true;
-        } else if (id == R.id.action_refresh) {
-            return true;
-        } else if (id == android.R.id.home) {
-            final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-            mDrawerLayout.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
     }
