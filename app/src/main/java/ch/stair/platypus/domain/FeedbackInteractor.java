@@ -1,12 +1,11 @@
 package ch.stair.platypus.domain;
 
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executor;
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
-import ch.stair.platypus.repository.models.Feedback;
 import ch.stair.platypus.rest.SyncFeedbacks;
 
 public class FeedbackInteractor extends Interactor<List<FeedbackModel>, Void> {
@@ -25,9 +24,13 @@ public class FeedbackInteractor extends Interactor<List<FeedbackModel>, Void> {
     }
 
     public void fetchRemoteFeedbacks() {
-        this.syncFeedbacks.fetchLatestFeedbacks(new Observer<List<FeedbackModel>>() {
+        this.syncFeedbacks.fetchFeedbacksBefore(this.repository.getLastSyncDate().getTime(), new Observer<List<FeedbackModel>>() {
             @Override
             public void onFinished(List<FeedbackModel> feedbackModels) {
+                final int FiveMinutesServerAndClientTimeDifferenceBuffer = 5 * 60;
+                final long lastSync = (System.currentTimeMillis() / 1000L) - FiveMinutesServerAndClientTimeDifferenceBuffer;
+                final Date lastSyncDate = new Date(lastSync);
+                FeedbackInteractor.this.repository.saveLastSyncDate(lastSyncDate);
                 FeedbackInteractor.this.repository.saveFeedbacks(feedbackModels);
             }
         });

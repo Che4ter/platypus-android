@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
-import ch.stair.platypus.PreferencesManager;
 import ch.stair.platypus.domain.FeedbackModel;
 import ch.stair.platypus.domain.Observer;
 import ch.stair.platypus.rest.model.FeedbackPOJO;
@@ -25,13 +24,12 @@ public class SyncFeedbacks {
         this.client = ServiceGenerator.createService(PlatypusClient.class);
     }
 
-    public void fetchLatestFeedbacks(Observer<List<FeedbackModel>> observer) {
-        Call<List<FeedbackPOJO>> call = client.getFeedback(getLastSyncDate());
+    public void fetchFeedbacksBefore(final long time, final Observer<List<FeedbackModel>> observer) {
+        Call<List<FeedbackPOJO>> call = client.getFeedback(time);
         call.enqueue(new Callback<List<FeedbackPOJO>>() {
             @Override
             public void onResponse(Call<List<FeedbackPOJO>> call, Response<List<FeedbackPOJO>> response) {
                 if (response.isSuccessful() && !response.body().isEmpty()) {
-                    setLastSyncDate();
                     final List<FeedbackModel> feedbacks = mapToFeedbackModel(response);
                     observer.onFinished(feedbacks);
                 }
@@ -56,18 +54,5 @@ public class SyncFeedbacks {
                     x.getVotesCount(),
                     new ArrayList<>())
             ).collect(Collectors.toList());
-    }
-
-    private long getLastSyncDate() {
-        final PreferencesManager prefManager = PreferencesManager.getInstance();
-        final long lastSync = prefManager.getLongValue(PreferencesManager.KEYS.LAST_SYNC);
-        return lastSync;
-    }
-
-    private void setLastSyncDate() {
-        final PreferencesManager prefManager = PreferencesManager.getInstance();
-        final int FiveMinutesServerAndClientTimeDifferenceBuffer = 5 * 60;
-        final long lastSync = (System.currentTimeMillis() / 1000L) - FiveMinutesServerAndClientTimeDifferenceBuffer;
-        prefManager.setValue(PreferencesManager.KEYS.LAST_SYNC, lastSync);
     }
 }

@@ -1,39 +1,39 @@
-package ch.stair.platypus;
+package ch.stair.platypus.repository;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class PreferencesManager {
+import java.util.Date;
+
+import javax.inject.Inject;
+
+import ch.stair.platypus.BuildConfig;
+
+public class PreferencesRepository {
     private static final String PREF_NAME = BuildConfig.APPLICATION_ID + ".PREFS";
 
-    private static PreferencesManager sInstance;
     private final SharedPreferences mPref;
 
-    private PreferencesManager(Context context) {
+    @Inject
+    public PreferencesRepository(final Context context) {
         mPref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
     }
 
-    static synchronized void initializeInstance(Context context) {
-        if (sInstance == null) {
-            sInstance = new PreferencesManager(context);
-        }
+    public Date getLastSyncDate() {
+        return new Date(this.getLongValue(KEYS.LAST_SYNC));
     }
 
-    public static synchronized PreferencesManager getInstance() {
-        if (sInstance == null) {
-            throw new IllegalStateException(PreferencesManager.class.getSimpleName() +
-                    " is not initialized, call initializeInstance(..) method first.");
-        }
-        return sInstance;
+    public void saveLastSyncDate(Date lastSync) {
+        this.setValue(KEYS.LAST_SYNC, lastSync.getTime());
     }
 
-    public void setValue(KEYS key, long value) {
+    private void setValue(KEYS key, long value) {
         mPref.edit()
                 .putLong(key.toString(), value)
                 .commit();
     }
 
-    public long getLongValue(KEYS key) {
+    private long getLongValue(KEYS key) {
         return mPref.getLong(key.toString(), 0);
     }
 

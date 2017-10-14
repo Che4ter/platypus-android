@@ -14,8 +14,6 @@ public class App extends Application {
         super.onCreate();
 
         this.initializeInjector();
-
-        PreferencesManager.initializeInstance(this.getApplicationContext());
     }
 
     private void initializeInjector() {

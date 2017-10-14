@@ -9,6 +9,7 @@ import java.util.concurrent.Executors;
 import ch.stair.platypus.App;
 import ch.stair.platypus.repository.ObjectBoxRepository;
 import ch.stair.platypus.domain.Repository;
+import ch.stair.platypus.repository.RepositoryImpl;
 import ch.stair.platypus.repository.models.MyObjectBox;
 import dagger.Module;
 import dagger.Provides;
@@ -32,8 +33,8 @@ public class ApplicationModule {
 
   @Provides
   @Singleton
-  Repository provideRepository(final ObjectBoxRepository objectBoxRepository) {
-    return objectBoxRepository;
+  Repository provideRepository(final RepositoryImpl repository) {
+    return repository;
   }
 
   @Provides

@@ -8,13 +8,12 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 import ch.stair.platypus.domain.FeedbackModel;
-import ch.stair.platypus.domain.Repository;
 import ch.stair.platypus.repository.models.Feedback;
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
 import io.objectbox.exception.DbException;
 
-public class ObjectBoxRepository implements Repository {
+public class ObjectBoxRepository {
     private final Box<Feedback> feedbackBox;
 
     @Inject
@@ -22,7 +21,6 @@ public class ObjectBoxRepository implements Repository {
         this.feedbackBox = boxStore.boxFor(Feedback.class);
     }
 
-    @Override
     public List<FeedbackModel> getAllFeedbacks() {
         final List<FeedbackModel> feedbacks = this.feedbackBox
             .getAll()
