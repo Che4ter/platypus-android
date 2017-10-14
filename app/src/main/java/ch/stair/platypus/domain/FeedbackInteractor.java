@@ -24,8 +24,13 @@ public class FeedbackInteractor extends Interactor<List<FeedbackModel>, Void> {
         this.syncFeedbacks = syncFeedbacks;
     }
 
-    public void fetchOnlineFeedbackAndSaveToDB() {
-        this.syncFeedbacks.fetchLatestFeedbacksToDB();
+    public void fetchRemoteFeedbacks() {
+        this.syncFeedbacks.fetchLatestFeedbacks(new Observer<List<FeedbackModel>>() {
+            @Override
+            public void onFinished(List<FeedbackModel> feedbackModels) {
+                FeedbackInteractor.this.repository.saveFeedbacks(feedbackModels);
+            }
+        });
     }
 
     @Override

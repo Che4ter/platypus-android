@@ -38,22 +38,22 @@ public class FeedbackModel {
     }
 
     public long getId() {
-        return id;
+        return this.id;
     }
 
     public String getText() {
-        return text;
+        return this.text;
     }
 
     public Date getCreatedOn() {
-        return createdOn;
+        return this.createdOn;
     }
 
     public int getVoteCount() {
-        return voteCount;
+        return this.voteCount;
     }
 
-    public String getHashtags() {return hashtags;}
+    public String getHashtags() {return this.hashtags;}
 
     public void upVote(){
         this.voteCount++;

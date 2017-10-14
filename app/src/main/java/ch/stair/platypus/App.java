@@ -1,6 +1,5 @@
 package ch.stair.platypus;
 
-
 import android.app.Application;
 
 import ch.stair.platypus.di.components.ApplicationComponent;
@@ -17,7 +16,6 @@ public class App extends Application {
         this.initializeInjector();
 
         PreferencesManager.initializeInstance(this.getApplicationContext());
-
     }
 
     private void initializeInjector() {

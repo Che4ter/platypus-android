@@ -13,7 +13,7 @@ public class PreferencesManager {
         mPref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
     }
 
-    public static synchronized void initializeInstance(Context context) {
+    static synchronized void initializeInstance(Context context) {
         if (sInstance == null) {
             sInstance = new PreferencesManager(context);
         }
@@ -33,32 +33,9 @@ public class PreferencesManager {
                 .commit();
     }
 
-    public void setValue(KEYS key, String value) {
-        mPref.edit()
-                .putString(key.toString(), value)
-                .commit();
-    }
-
     public long getLongValue(KEYS key) {
         return mPref.getLong(key.toString(), 0);
     }
-
-    public String getStringValue(KEYS key) {
-        return mPref.getString(key.toString(), "");
-    }
-
-    public void remove(String key) {
-        mPref.edit()
-                .remove(key)
-                .commit();
-    }
-
-    public boolean clear() {
-        return mPref.edit()
-                .clear()
-                .commit();
-    }
-
 
     public enum KEYS {
         LAST_SYNC("LASTSYNC");

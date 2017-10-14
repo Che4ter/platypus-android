@@ -8,7 +8,6 @@ import ch.stair.platypus.di.PerActivity;
 import ch.stair.platypus.domain.FeedbackModel;
 import ch.stair.platypus.domain.FeedbackInteractor;
 import ch.stair.platypus.domain.Observer;
-import ch.stair.platypus.presentation.feedbackcreation.CreateFeedbackPresenter;
 
 @PerActivity
 public class FeedbackPresenter {
@@ -29,7 +28,7 @@ public class FeedbackPresenter {
     }
 
     public void initialize() {
-        this.feedbackInteractor.fetchOnlineFeedbackAndSaveToDB();
+        this.feedbackInteractor.fetchRemoteFeedbacks();
     }
 
     public void showFeedbacks() {
