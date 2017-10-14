@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -67,7 +68,7 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
         if (supportActionBar != null) {
             VectorDrawableCompat indicator
                     = VectorDrawableCompat.create(getResources(), R.drawable.ic_menu, getTheme());
-            indicator.setTint(ResourcesCompat.getColor(getResources(),R.color.white,getTheme()));
+            indicator.setTint(ResourcesCompat.getColor(getResources(), R.color.white,getTheme()));
             supportActionBar.setHomeAsUpIndicator(indicator);
             supportActionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -136,6 +137,9 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
             return true;
+        } else if (id == android.R.id.home) {
+            final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+            mDrawerLayout.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
     }
