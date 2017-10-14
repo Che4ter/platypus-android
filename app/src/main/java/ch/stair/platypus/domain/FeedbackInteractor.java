@@ -6,25 +6,23 @@ import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
 
-import ch.stair.platypus.rest.SyncFeedbacks;
-
 public class FeedbackInteractor extends Interactor<List<FeedbackModel>, Void> {
 
     private final Repository repository;
-    private final SyncFeedbacks syncFeedbacks;
+    private final RemoteService remoteService;
 
     @Inject
     public FeedbackInteractor(
             final Executor executor,
             final Repository repository,
-            final SyncFeedbacks syncFeedbacks) {
+            final RemoteService remoteService) {
         super(executor);
         this.repository = repository;
-        this.syncFeedbacks = syncFeedbacks;
+        this.remoteService = remoteService;
     }
 
     public void fetchRemoteFeedbacks() {
-        this.syncFeedbacks.fetchFeedbacksBefore(this.repository.getLastSyncDate().getTime(), new Observer<List<FeedbackModel>>() {
+        this.remoteService.fetchFeedbacksBefore(this.repository.getLastSyncDate(), new Observer<List<FeedbackModel>>() {
             @Override
             public void onFinished(List<FeedbackModel> feedbackModels) {
                 final int FiveMinutesServerAndClientTimeDifferenceBuffer = 5 * 60;
