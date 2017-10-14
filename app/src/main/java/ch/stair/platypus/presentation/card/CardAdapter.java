@@ -1,5 +1,7 @@
 package ch.stair.platypus.presentation.card;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {
 
     void setViewModels(final List<FeedbackModel> comments) {
         this.comments = comments;
+        new Handler(Looper.getMainLooper()).post(() -> CardAdapter.this.notifyDataSetChanged());
     }
 
     @Override
