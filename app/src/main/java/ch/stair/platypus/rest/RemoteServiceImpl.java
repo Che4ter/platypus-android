@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 import ch.stair.platypus.authentication.AuthenticationManager;
 import ch.stair.platypus.domain.CreateFeedbackModel;
-import ch.stair.platypus.presentation.RemoteService;
+import ch.stair.platypus.domain.RemoteService;
 
 public class RemoteServiceImpl implements RemoteService{
 

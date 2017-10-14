@@ -1,6 +1,6 @@
 package ch.stair.platypus.di.modules;
 
-import ch.stair.platypus.presentation.RemoteService;
+import ch.stair.platypus.domain.RemoteService;
 import ch.stair.platypus.rest.RemoteServiceImpl;
 import dagger.Module;
 import dagger.Provides;

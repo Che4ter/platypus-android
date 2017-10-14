@@ -4,8 +4,6 @@ import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
 
-import ch.stair.platypus.presentation.RemoteService;
-
 public class CreateFeedbackInteractor extends Interactor<Boolean, CreateFeedbackModel> {
 
     private final RemoteService remoteService;
