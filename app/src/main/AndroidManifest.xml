@@ -30,13 +30,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.DetailActivity"
-            android:parentActivityName=".presentation.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".presentation.MainActivity" />
-        </activity>
-        <activity
         android:name=".authentication.LoginActivity"
         android:label="@string/title_activity_login"
         android:parentActivityName=".presentation.MainActivity"
