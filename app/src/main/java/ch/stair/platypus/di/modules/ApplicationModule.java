@@ -6,16 +6,15 @@ import android.content.Context;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import javax.inject.Singleton;
+
 import ch.stair.platypus.App;
-import ch.stair.platypus.repository.ObjectBoxRepository;
 import ch.stair.platypus.domain.Repository;
 import ch.stair.platypus.repository.RepositoryImpl;
 import ch.stair.platypus.repository.models.MyObjectBox;
 import dagger.Module;
 import dagger.Provides;
 import io.objectbox.BoxStore;
-
-import javax.inject.Singleton;
 
 @Module
 public class ApplicationModule {

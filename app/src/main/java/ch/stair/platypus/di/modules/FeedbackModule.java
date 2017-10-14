@@ -1,7 +1,9 @@
 package ch.stair.platypus.di.modules;
 
 import ch.stair.platypus.domain.RemoteService;
+import ch.stair.platypus.rest.PlatypusClient;
 import ch.stair.platypus.rest.RemoteServiceImpl;
+import ch.stair.platypus.rest.ServiceGenerator;
 import dagger.Module;
 import dagger.Provides;
 
@@ -12,6 +14,11 @@ public class FeedbackModule {
 
     @Provides
     RemoteService provideRemoteService(final RemoteServiceImpl remoteService) {
-    return remoteService;
+        return remoteService;
+    }
+
+    @Provides
+    PlatypusClient providePlatypusClient() {
+        return ServiceGenerator.createService(PlatypusClient.class);
     }
 }

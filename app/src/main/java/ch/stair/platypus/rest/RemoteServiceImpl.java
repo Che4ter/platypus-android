@@ -28,9 +28,11 @@ public class RemoteServiceImpl implements RemoteService{
     private final PlatypusClient client;
 
     @Inject
-    public RemoteServiceImpl(final AuthenticationManager authenticationManager){
+    public RemoteServiceImpl(
+            final AuthenticationManager authenticationManager,
+            final PlatypusClient platypusClient){
         this.authenticationManager = authenticationManager;
-        this.client = ServiceGenerator.createService(PlatypusClient.class);
+        this.client = platypusClient;
     }
 
     @Override
