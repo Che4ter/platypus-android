@@ -28,7 +28,7 @@ class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {
 
     void setViewModels(final List<FeedbackModel> comments) {
         this.comments = comments;
-        new Handler(Looper.getMainLooper()).post(() -> CardAdapter.this.notifyDataSetChanged());
+        new Handler(Looper.getMainLooper()).post(CardAdapter.this::notifyDataSetChanged);
     }
 
     @Override
