@@ -21,7 +21,7 @@ public class CreateFeedbackActivity extends BaseActivity implements HasComponent
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_layout);
+        setContentView(R.layout.activity_create_feedback);
         this.initializeInjector();
         this.addFragment(R.id.fragmentContainer, new CreateFeedbackFragment());
     }
