@@ -135,9 +135,20 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
+            refreshContent();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void refreshContent() {
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        final Adapter adapter = (Adapter) viewPager.getAdapter();
+        final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        Refreshable refreshable = (Refreshable) adapter.getItem(viewPager.getCurrentItem());
+        refreshLayout.setRefreshing(true);
+        refreshable.refresh();
+        refreshLayout.setRefreshing(false);
     }
 
     private static class Adapter extends FragmentPagerAdapter {
