@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.initializeInjector();
+        this.initializeInjectorIfNotYetDone();
 
         this.changeTopLeftIconInToolbarToFunctionAsNavigationBarOpener();
         this.setupTabs();
@@ -48,15 +48,18 @@ public class MainActivity extends BaseActivity implements HasComponent<FeedbackC
         this.setupCreateFeedbackActionButton();
     }
 
-    private void initializeInjector() {
-        this.feedbackComponent = DaggerFeedbackComponent.builder()
-                .applicationComponent(getApplicationComponent())
-                .activityModule(getActivityModule())
-                .build();
+    private void initializeInjectorIfNotYetDone() {
+        if (this.feedbackComponent == null) {
+            this.feedbackComponent = DaggerFeedbackComponent.builder()
+                    .applicationComponent(getApplicationComponent())
+                    .activityModule(getActivityModule())
+                    .build();
+        }
     }
 
     @Override
     public FeedbackComponent getComponent() {
+        this.initializeInjectorIfNotYetDone();
         return this.feedbackComponent;
     }
 
