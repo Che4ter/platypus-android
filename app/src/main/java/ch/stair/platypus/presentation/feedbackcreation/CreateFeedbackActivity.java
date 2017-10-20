@@ -22,19 +22,22 @@ public class CreateFeedbackActivity extends BaseActivity implements HasComponent
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_feedback);
-        this.initializeInjector();
+        this.initializeInjectorIfNotYetDone();
         this.addFragment(R.id.fragmentContainer, new CreateFeedbackFragment());
     }
 
-    private void initializeInjector() {
-        this.feedbackComponent = DaggerFeedbackComponent.builder()
-                .applicationComponent(getApplicationComponent())
-                .activityModule(getActivityModule())
-                .build();
+    private void initializeInjectorIfNotYetDone() {
+        if (this.feedbackComponent == null) {
+            this.feedbackComponent = DaggerFeedbackComponent.builder()
+                    .applicationComponent(getApplicationComponent())
+                    .activityModule(getActivityModule())
+                    .build();
+        }
     }
 
     @Override
     public FeedbackComponent getComponent() {
+        this.initializeInjectorIfNotYetDone();
         return this.feedbackComponent;
     }
 }
